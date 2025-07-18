@@ -42,7 +42,7 @@ var	mde = 'l',
 		},
 		'hlp':{
 			'head':'Welcome to '+$Q['pool']['nme'],
-			'text':'Getting started is easy and this pool has a large and friendly community that are happy to help you. The pool operators are M5M400 and Snipa22 who can be reached in the #monero-pools IRC or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be patient and someone will get back to you. Most of the time help can be found quicker in the chat. The pool has a quite stable and knowlegable community - you can join the chat and seek help and a friendly chat there :)'
+			'text':'Getting started is easy and this pool has a friendly community that is happy to help you. The pool operator is Whisky who can be reached in the salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient, this is not his full time job, and he will get back to you. The pool is building a stable and knowlegable community - you can join the salvium discord and seek help and a friendly chat there :)'
 		},
 		'msg':{
 			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a share, your stats will appear here.'},
@@ -1117,20 +1117,20 @@ function dta_Payments(pge){
 }
 function dta_Help(){
 	document.getElementById('PageTopL').innerHTML = $$['hlp']['head'];
-	document.getElementById('PageTopR').innerHTML = '<span class="txttny C2">Join Us on IRC<br>#monero-pools</span>';
+	document.getElementById('PageTopR').innerHTML = '<span class="txttny C2">Join Us on the<br><a href="https://discord.gg/g76hnEnz" class="C1 hov" target="_blank">Salvium Discord</a></span>';
 	var ins = '<p>'+$$['hlp']['text']+'</p>'+
 		'<div class="helpgroup">'+
 			'<div class="helptitle txtbig">Step 1 - Install Wallet & Create Address<div class="btnback">'+$I['arrow']+'</div></div>'+
-			'<div class="helpteaser">Start here if you need a Monero address and wallet.</div>'+
+			'<div class="helpteaser">Start here if you need a Salvium address and wallet.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>The <a href="https://www.getmonero.org/downloads/" target="_blank" class="C1 hov">Official Monero Wallet</a> is recommended. Monero Outreach\'s <a href="https://www.monerooutreach.org/stories/monero_wallet_quickstart.php" class="C1 hov" target="_blank">Wallet Guide</a> has a list of other wallet options including paper wallets.</p>'+
+				'<p>The <a href="https://www.salvium.io/download.html" target="_blank" class="C1 hov">Official Salvium Wallet</a> is recommended. </p>'+
 			'</div>'+
 		'</div>'+
 		'<div class="helpgroup">'+
 			'<div class="helptitle txtbig">Step 2 - Install Mining Software<div class="btnback">'+$I['arrow']+'</div></div>'+
-			'<div class="helpteaser">Install the software needed to mine Monero.</div>'+
+			'<div class="helpteaser">Install the software needed to mine Salvium.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>Select the miner that best suits your hardware and follow their installation instructions. If you need help, visit #monero-pools.</p>'+
+				'<p>Select the miner that best suits your hardware and follow their installation instructions. If you need help, visit the <a href="https://discord.gg/g76hnEnz" class="C1 hov" target="_blank">Salvium Discord</a></p>'+
 				'<p><table class="txtsmall C3'+mde+'"><tr>'+
 					'<td NOWRAP>'+
 						'<i>Alphabetically</i><br>'+
@@ -1150,7 +1150,7 @@ function dta_Help(){
 			'<div class="helpteaser">Select a pool server and port and configure you miner.</div>'+
 			'<div class="helpcontent hide">'+
 				'<p>Each mining software will have it\'s own config, but they will all ask for the same information:</p>'+
-				'<p><b>Your Monero Address</b><br>Often this will be labeled username, but check the instructions. You can specify a paymentID by using the following format: <i>address</i>.<i>paymentID</i></p>'+
+				'<p><b>Your Salvium Address</b><br>Often this will be labeled username, but check the instructions. You can specify a paymentID by using the following format: <i>address</i>.<i>paymentID</i></p>'+
 				'<p><b>Pool Address</b><br>The miner will want a url and a port, like this: pool.supportsal.com:3333</p>'+
 				'<p><table class="txtsmall C3'+mde+'"><tr>'+
 					'<td>'+
@@ -1172,7 +1172,7 @@ function dta_Help(){
 			'<div class="helpteaser">Launch the miner and learn more.</div>'+
 			'<div class="helpcontent hide">'+
 				'<p>This pool uses PPLNS to determine payouts. It helps to combat pool hopping and ensures a good payout for miners.</p>'+
-				'<p>'+Perc('0.6')+' Pool Fee</p>'+
+				'<p>'+Perc('0.7')+' Pool Fee</p>'+
 				'<p>0.1 SAL Default Payout</p>'+
 				'<p>60 Block Confirmation Time</p>'+
 			'</div>'+
