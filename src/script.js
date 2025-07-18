@@ -1,7 +1,7 @@
 var	mde = 'l',
 	$Q = {										
 		'pool':{
-			'nme':'SupportXMR',										//also sets the cookie prefix
+			'nme':'SupportSAL',										//also sets the cookie prefix
 		},
 		'clr':{
 			'main':'f06923',										//C1
@@ -10,21 +10,21 @@ var	mde = 'l',
 			'back-d':'313131'	   									//C0 - dark
 		},
 		'cur':{
-			'nme':'Monero',						
-			'sym':'XMR',
+			'nme':'Salvium',						
+			'sym':'SAL',
 			'blk':2,												//blocktime in minutes
 			'reg':/^[4|8]{1}([A-Za-z0-9]{105}|[A-Za-z0-9]{94})$/	//address regex
 		},
-		'api':'https://supportxmr.com/api/',
-		//'api':'http://69.164.198.226/api/',
-		'explorer':'https://xmrchain.net/block/',
-		'explorertx':'https://xmrchain.net/tx/',
+		'api':'https://www.supportsal.com/api/',
+		//'api':'http://74.208.99.57/api/',
+		'explorer':'https://explorer.salvium.io',
+		'explorertx':'https://explorer.salvium.io/tx/',
 		'news':false,												//enable news (motd) alerts on homepage
 		'email':false,												//enable email notifications
-		'timer':60,													//refresh timer in seconds
+		'timer':120,													//refresh timer in seconds
 		'graph':{
 			'hrs':8,												//max chart length in hours
-			'pplns':false,											//show pplns window on chart
+			'pplns':true,											//show pplns window on chart
 			'blockmin':25											//min number of blocks to show (blocks take their own time scale) max 100
 		},
 		'pay':{
@@ -42,7 +42,7 @@ var	mde = 'l',
 		},
 		'hlp':{
 			'head':'Welcome to '+$Q['pool']['nme'],
-			'text':'Getting started is easy and this pool has a large and friendly community that are happy to help you. The pool operators are M5M400 and Snipa22 who can be reached in the #monero-pools IRC or at <a href="mailto:support@supportxmr.com" class="C1 hov">support@supportxmr.com</a>. Please be patient and someone will get back to you. Most of the time help can be found quicker in the chat. The pool has a quite stable and knowlegable community - you can join the chat and seek help and a friendly chat there :)'
+			'text':'Getting started is easy and this pool has a large and friendly community that are happy to help you. The pool operators are M5M400 and Snipa22 who can be reached in the #monero-pools IRC or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be patient and someone will get back to you. Most of the time help can be found quicker in the chat. The pool has a quite stable and knowlegable community - you can join the chat and seek help and a friendly chat there :)'
 		},
 		'msg':{
 			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a share, your stats will appear here.'},
@@ -1151,7 +1151,7 @@ function dta_Help(){
 			'<div class="helpcontent hide">'+
 				'<p>Each mining software will have it\'s own config, but they will all ask for the same information:</p>'+
 				'<p><b>Your Monero Address</b><br>Often this will be labeled username, but check the instructions. You can specify a paymentID by using the following format: <i>address</i>.<i>paymentID</i></p>'+
-				'<p><b>Pool Address</b><br>The miner will want a url and a port, like this: pool.supportxmr.com:3333</p>'+
+				'<p><b>Pool Address</b><br>The miner will want a url and a port, like this: pool.supportsal.com:3333</p>'+
 				'<p><table class="txtsmall C3'+mde+'"><tr>'+
 					'<td>'+
 						'<p>Port descriptions:</p>'+
@@ -1173,7 +1173,7 @@ function dta_Help(){
 			'<div class="helpcontent hide">'+
 				'<p>This pool uses PPLNS to determine payouts. It helps to combat pool hopping and ensures a good payout for miners.</p>'+
 				'<p>'+Perc('0.6')+' Pool Fee</p>'+
-				'<p>0.1 XMR Default Payout</p>'+
+				'<p>0.1 SAL Default Payout</p>'+
 				'<p>60 Block Confirmation Time</p>'+
 			'</div>'+
 		'</div>';
