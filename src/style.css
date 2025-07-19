@@ -7,7 +7,7 @@
     font-style: normal;
 }
 
-/* Colors - Aligned with Salvium website (https://salvium.io) */
+/* Colors - Updated for Official Salvium Brand Colors */
 .C0l { color: #181C24 } /* Primary text color (light theme) */
 .C0fll { fill: #181C24 }
 .C0bkl { background-color: #F7F8FA } /* Light theme background */
@@ -16,13 +16,13 @@
 .C0fld { fill: #F7F8FA }
 .C0bkd { background-color: #181C24 } /* Dark theme background */
 .C0std { stroke: #F7F8FA }
-.C1 { color: #F06923 } /* Orange accent (unchanged, matches Salvium) */
-.C1fl { fill: #F06923 }
-.C1fl_hov:hover { fill: #F06923 !important }
-.C1bk { background-color: #F06923 }
-.C1flim { fill: #F06923 !important }
-.C1br { border-color: rgba(240, 105, 35, 0.7) !important }
-.C1st { stroke: #F06923 }
+.C1 { color: #40E0D0 } /* Salvium Primary Accent - Updated from orange #F06923 */
+.C1fl { fill: #40E0D0 }
+.C1fl_hov:hover { fill: #40E0D0 !important }
+.C1bk { background-color: #40E0D0 }
+.C1flim { fill: #40E0D0 !important }
+.C1br { border-color: rgba(64, 224, 208, 0.7) !important } /* Turquoise with alpha */
+.C1st { stroke: #40E0D0 }
 .C2 { color: #818181 } /* Secondary gray (unchanged, matches Salvium) */
 .C2fl { fill: #818181 }
 .C2br, .C2br_hov:hover { border-color: #818181 }
@@ -42,6 +42,12 @@
 .C5 { color: rgba(95, 155, 45, 0.9) } /* Success states (unchanged) */
 .C5bk { background-color: rgba(95, 155, 45, 0.9) }
 .C5fl { fill: rgba(95, 155, 45, 0.9) }
+
+/* Optional: Add Salvium Green Dot color as C6 for special highlights */
+.C6 { color: #0AEB85 } /* Salvium Green Dot color */
+.C6fl { fill: #0AEB85 }
+.C6bk { background-color: #0AEB85 }
+.C6st { stroke: #0AEB85 }
 
 /*--------------------------------------*/
 /*-----End of Customization Section------- (You can customize the rest, but shouldn't need to) */
@@ -105,7 +111,7 @@ header, section, footer { margin: 0; padding: 0 }
 .SplitL, .SplitR, .BoxL, .BoxR { display: inline-block; width: 50%; box-sizing: border-box; padding: 0 3px }
 
 /* Text */
-.txtbig, .txtmed { font-family: 'GothamCondensed', Helvetica, sans-serif;extra; font-size: 28px }
+.txtbig, .txtmed { font-family: 'GothamCondensed', Helvetica, sans-serif; font-size: 28px }
 .txtmed { font-size: 20px }
 .txt, .txttny, .txtsmall { font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; line-height: 18px }
 .txtsmall { font-size: 13px; line-height: 16px }
@@ -257,7 +263,7 @@ header { height: 44px }
 #PageBot { min-height: 200px }
 .helpgroup { margin-top: 20px; padding-left: 25px; padding-bottom: 10px }
 
-.helptitle { position: relative; display: inline-block; color: #F06923; fill: #F06923; cursor: pointer }
+.helptitle { position: relative; display: inline-block; color: #40E0D0; fill: #40E0D0; cursor: pointer } /* Updated to Salvium turquoise */
 .helptitle:hover { color: #818181; fill: #818181 }
 .helptitle .btnback { position: absolute; z-index: 2; width: 26px; height: 26px; border-radius: 50%; margin-left: -33px; top: -2px; padding: 3px; box-sizing: border-box }
 .helpteaser, .helpcontent { margin-top: 5px }
