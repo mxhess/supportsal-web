@@ -1123,7 +1123,7 @@ function dta_Help(){
 			'<div class="helptitle txtbig">Step 1 - Install Wallet & Create Address<div class="btnback">'+$I['arrow']+'</div></div>'+
 			'<div class="helpteaser">Start here if you need a Salvium address and wallet.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>The <a href="https://www.salvium.io/download.html" target="_blank" class="C1 hov">Official Salvium Wallet</a> is recommended. </p>'+
+				'<p>The <a href="https://salvium.io/download.html" target="_blank" class="C1 hov">Official Salvium Wallet</a> is recommended. </p>'+
 			'</div>'+
 		'</div>'+
 		'<div class="helpgroup">'+
