@@ -42,7 +42,7 @@ var	mde = 'l',
 		},
 		'hlp':{
 			'head':'Welcome to '+$Q['pool']['nme'],
-			'text':'Getting started is easy and this pool has a friendly community that is happy to help you. The pool operator is Whisky who can be reached in the salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient, this is not his full time job, and he will get back to you. The pool is building a stable and knowlegable community - you can join the salvium discord and seek help and a friendly chat there :)'
+			'text':'The point to this pool is not only to mine and earn for ourselves but a portion of the pool net proceeds (TBD) after covering operating costs will be donated on a regular basis to the Salvium developers and project. Our goal is to further the development and adoption of Salvium and what better way to do that then with a the developers receiving rewards? It's hard to top that! Getting started is easy and this pool has a friendly community that is willing to help you. The pool operator is Whisky who can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient, this is not his full time job, and he will get back to you. The pool is working on building a stable and knowlegable community - you can join the salvium discord and seek friendly help there.'
 		},
 		'msg':{
 			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a share, your stats will appear here.'},
