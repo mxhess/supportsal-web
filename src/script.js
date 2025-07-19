@@ -16,8 +16,13 @@ var	mde = 'l',
 			'reg':/^[4|8]{1}([A-Za-z0-9]{105}|[A-Za-z0-9]{94})$/	//address regex
 		},
 		'api':'https://www.supportsal.com/api/',
+<<<<<<< HEAD
 		//'api':'http://74.208.99.57/api/',
 		'explorer':'https://explorer.salvium.io',
+=======
+		//'api':'https://74.208.99.57/api/',
+		'explorer':'https://explorer.salvium.io/',
+>>>>>>> de5f0fe (good script changes so far)
 		'explorertx':'https://explorer.salvium.io/tx/',
 		'news':false,												//enable news (motd) alerts on homepage
 		'email':false,												//enable email notifications
@@ -42,12 +47,16 @@ var	mde = 'l',
 		},
 		'hlp':{
 			'head':'Welcome to '+$Q['pool']['nme'],
+<<<<<<< HEAD
 			'text':'The point to this pool is not only to mine and earn for ourselves but a portion of the pool net proceeds (TBD) after covering operating costs will be donated on a regular basis to the Salvium developers and project. Our goal is to further the development and adoption of Salvium and what better way to do that then with a the developers receiving rewards? It's hard to top that! Getting started is easy and this pool has a friendly community that is willing to help you. The pool operator is Whisky who can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient, this is not his full time job, and he will get back to you. The pool is working on building a stable and knowlegable community - you can join the salvium discord and seek friendly help there.'
+=======
+			'text':'Getting started is fairly simple and this pool is building a growing community that will probably be happy to help you. The pool operator can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient because this is not his primary job and he will do his best to get back to you. Most of the time faster help can be found in the chat. I encourage you to join the discord and participate in growing <a href="https://discord.gg/g76hnEnz" class="C1 hov">the discord community here</a>.'
+>>>>>>> de5f0fe (good script changes so far)
 		},
 		'msg':{
-			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a share, your stats will appear here.'},
-			'addr_invalid':{'head':'Invalid '+$Q['cur']['nme']+' Address', 'text':'Double check that your address is complete.'},
-			'addr_notfound':{'head':'Address Not Found', 'text':'If you\'ve submitted your first share, be patient, it may take a minute or two to update. If your shares are being rejected, visit the <u class="nav C1" data-tar="help">help section.</u>'},
+			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a few shares, your stats will start to appear here.'},
+			'addr_invalid':{'head':'Invalid '+$Q['cur']['nme']+' Address', 'text':'Double check that your address is correct or complete.'},
+			'addr_notfound':{'head':'Address Not Found', 'text':'If you\'ve submitted your first share, be patient, it may take a few minutes to update. If your shares are being rejected, visit the <u class="nav C1" data-tar="help">help section.</u>'},
 			'addr_nodata':{'head':'No Data', 'text':''}
 		},
 		'nav':{
