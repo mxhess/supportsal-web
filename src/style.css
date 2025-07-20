@@ -49,6 +49,23 @@
 .C6bk { background-color: #0AEB85 }
 .C6st { stroke: #0AEB85 }
 
+/* all for the logo and dot */
+#HeadLogo { display: flex; align-items: center; height: 20px; }
+#HeadLogo .support { font-family: GothamCondensed, sans-serif; font-size: 18px; font-weight: 500; color: #e0e0e0; }
+#HeadLogo .sal { font-family: GothamCondensed, sans-serif; font-size: 20px; font-weight: 700; color: #40E0D0; margin-left: 3px; }
+#HeadLogo .dot { 
+    display: inline-block !important;
+    width: 8px !important;
+    height: 8px !important;
+    background-color: #0AEB85 !important;
+    border-radius: 50% !important;
+    margin-left: 8px !important;
+    margin-bottom: 2px !important; /* Helps align it vertically */
+    flex-shrink: 0 !important;
+    font-size: 0 !important;
+    vertical-align: middle !important;
+}
+
 /*--------------------------------------*/
 /*-----End of Customization Section------- (You can customize the rest, but shouldn't need to) */
 /*--------------------------------------*/
