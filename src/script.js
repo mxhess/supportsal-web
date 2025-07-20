@@ -13,7 +13,7 @@ var	mde = 'd',
 			'nme':'Salvium',						
 			'sym':'SAL',
 			'blk':2,												//blocktime in minutes
-			'reg':/^SaLv[A-Za-z0-9]{103,141}$/    //address regex with integrated address support
+			'reg':/^SaLv[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}$/    //address regex
 		},
 		'api':'https://www.supportsal.com/api/',
 		//'api':'http://74.208.99.57/api/',
@@ -42,7 +42,7 @@ var	mde = 'd',
 		},
 		'hlp':{
 			'head':'Welcome to '+$Q['pool']['nme'],
-			'text':'Getting started is fairly simple and this pool is building a growing community that will probably be happy to help you. The pool operator can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient because this is not his primary job and he will do his best to get back to you. Most of the time faster help can be found in the chat. I encourage you to join the discord and participate in growing <a href="https://discord.gg/g76hnEnz" class="C1 hov">the discord community here</a>.'
+			'text':'The purpose of our pool, besides mining for ourselves, is to support the Salvium project by donating a portion of our monthly proceeds (TBD-just getting started) after costs are covered. Getting started is fairly simple and this pool is building a growing community that will try to help you. The pool operator, Whisky, can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient because this is not his primary job and he will do his best to get back to you. Most of the time faster help can be found in the chat. I encourage you to join the discord and participate in growing <a href="https://discord.gg/g76hnEnz" class="C1 hov">the discord community here</a>.'
 		},
 		'msg':{
 			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a few shares, your stats will start to appear here.'},
@@ -1153,17 +1153,17 @@ function dta_Help(){
 			'<div class="helptitle txtbig">Step 3 - Configure Settings<div class="btnback">'+$I['arrow']+'</div></div>'+
 			'<div class="helpteaser">Select a pool server and port and configure you miner.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>Each mining software will have it\'s own config, but they will all ask for the same information:</p>'+
+				'<p>Each mining software will have it\'s own config, but they will all ask for similar information:</p>'+
 				'<p><b>Your Salvium Address</b><br>Often this will be labeled username, but check the instructions. You can specify a paymentID by using the following format: <i>address</i>.<i>paymentID</i></p>'+
-				'<p><b>Pool Address</b><br>The miner will want a url and a port, like this: pool.supportsal.com:3333</p>'+
+				'<p><b>Pool Address</b><br>The miner will want a url and a port, like this: pool.supportsal.com:3333<br>NOTE: all ports are ssl enabled</p>'+
 				'<p><table class="txtsmall C3'+mde+'"><tr>'+
 					'<td>'+
 						'<p>Port descriptions:</p>'+
-						'<ul><li>3333 Low-end CPU</li><li>5555 Fast/Multi CPU</li><li>7777 GPU rigs</li><li>9000 SSL/TLS</li></ul>'+
+						'<ul><li>3333 Low-end CPU</li><li>5555 Fast/Multi CPU</li><li>7777 High end systems</li></ul>'+
 					'</td>'+
 					'<td>'+
-						'<p>If you can\'t get through firewall, try these:</p>'+
-						'<ul><li>8080 Firewall bypass</li><li>80 Firewall bypass</li><li>443 Firewall bypass w/SSL/TLS</li></ul>'+
+						'<p>If you can\'t get through firewall,</p>'+
+						'<ul><li>443 Firewall bypass</li><li>8443 Firewall bypass</li></ul>'+
 					'</td>'+
 				'</tr></table></p>'+
 				'<p><b>Optional Fields</b><br>You can also set worker names or fixed difficulty through the configuration.</p>'+
