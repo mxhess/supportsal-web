@@ -42,7 +42,7 @@ var	mde = 'd',
 		},
 		'hlp':{
 			'head':'Welcome to '+$Q['pool']['nme'],
-			'text':'The purpose of our pool, besides mining for ourselves, is to support the Salvium project by donating a portion of our monthly proceeds (TBD-just getting started) after costs are covered. Getting started is fairly simple and this pool is building a growing community that will try to help you. The pool operator, Whisky, can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient because this is not his primary job and he will do his best to get back to you. Most of the time faster help can be found in the chat. I encourage you to join the discord and participate in growing <a href="https://discord.gg/g76hnEnz" class="C1 hov">the discord community here</a>.'
+			'text':'The purpose of our pool, besides mining salvium, is to support the Salvium project by donating a portion of our monthly proceeds (TBD-just getting started) after costs are covered. Getting started is fairly simple and this pool is building a growing community that will try to help you. The pool operator, Whisky, can be reached in the Salvium discord or at <a href="mailto:support@supportsal.com" class="C1 hov">support@supportsal.com</a>. Please be very patient because this is not his primary job and he will do his best to get back to you. Most of the time faster help can be found in the chat. I encourage you to join the discord and participate in growing <a href="https://discord.gg/g76hnEnz" class="C1 hov">the discord community here</a>.'
 		},
 		'msg':{
 			'welcome':{'head':'Welcome to '+$Q['pool']['nme'], 'text':'Visit the <u class="nav C1" data-tar="help">help section</u> to get setup, then enter your '+$Q['cur']['nme']+' address above. After you\'ve submitted a few shares, your stats will start to appear here.'},
@@ -1134,19 +1134,11 @@ function dta_Help(){
 			'<div class="helptitle txtbig">Step 2 - Install Mining Software<div class="btnback">'+$I['arrow']+'</div></div>'+
 			'<div class="helpteaser">Install the software needed to mine Salvium.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>Select the miner that best suits your hardware and follow their installation instructions. If you need help, visit the <a href="https://discord.gg/g76hnEnz" class="C1 hov" target="_blank">Salvium Discord</a></p>'+
-				'<p><table class="txtsmall C3'+mde+'"><tr>'+
-					'<td NOWRAP>'+
-						'<i>Alphabetically</i><br>'+
-						'<a href="https://github.com/KlausT/ccminer-cryptonight/releases" class="C1 hov" target="_blank">ccminer-cryptonight</a> (Nvidia)<br>'+
-						'<a href="https://bitcointalk.org/index.php?topic=638915.0" class="C1 hov" target="_blank">Claymore\'s miner</a> (CPU, AMD)<br>'+
-					'</td>'+
-					'<td NOWRAP>'+
-						'<a href="https://github.com/Dead2/CryptoGoblin/releases" class="C1 hov" target="_blank">CryptoGoblin</a> (CPU, Nvidia, AMD)<br>'+
-						'<a href="https://github.com/xmrig/xmrig/" class="C1 hov" target="_blank">XMRig</a> (CPU, Nvidia, AMD)<br>'+
-						'<a href="https://github.com/fireice-uk/xmr-stak/releases" class="C1 hov" target="_blank">XMR-Stak</a> (CPU, Nvidia, AMD)'+
-					'</td>'+
-				'</tr></table></p>'+
+				'<p>We recommend either of the two miners and if you would like yours listed here please feel free to email us.  If you need help, visit the <a href="https://discord.gg/g76hnEnz" class="C1 hov" target="_blank">Salvium Discord</a></p>'+
+				'<p>'+
+				'<a href="https://github.com/xmrig/xmrig/" class="C1 hov" target="_blank">XMRig</a> (CPU, Nvidia, AMD) - preferred<br>'+
+				'<a href="https://github.com/fireice-uk/xmr-stak/releases" class="C1 hov" target="_blank">XMR-Stak</a> (CPU, Nvidia, AMD)'+
+				'</p>'+
 			'</div>'+
 		'</div>'+
 		'<div class="helpgroup">'+
