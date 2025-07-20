@@ -1,4 +1,4 @@
-var	mde = 'l',
+var	mde = 'd',
 	$Q = {										
 		'pool':{
 			'nme':'SupportSAL',										//also sets the cookie prefix
@@ -13,7 +13,7 @@ var	mde = 'l',
 			'nme':'Salvium',						
 			'sym':'SAL',
 			'blk':2,												//blocktime in minutes
-			'reg':/^[4|8]{1}([A-Za-z0-9]{105}|[A-Za-z0-9]{94})$/	//address regex
+			'reg':/^SaLv[A-Za-z0-9]{103,141}$/    //address regex with integrated address support
 		},
 		'api':'https://www.supportsal.com/api/',
 		//'api':'http://74.208.99.57/api/',
@@ -364,6 +364,10 @@ function init(){
 	
 	if(mde === 'l' && pref && pref.charAt(0) === 'D'){
 		mde = 'd';
+		SwitchMode();
+	}
+	if(mde === 'd'){
+		$C['TogMode'].innerHTML = $I['l'];
 		SwitchMode();
 	}
 	Dash_init();
