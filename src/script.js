@@ -1136,7 +1136,7 @@ function dta_Help(){
 			'<div class="helpcontent hide">'+
 				'<p>We recommend either of the two miners and if you would like yours listed here please feel free to email us.  If you need help, visit the <a href="https://discord.gg/g76hnEnz" class="C1 hov" target="_blank">Salvium Discord</a></p>'+
 				'<p>'+
-				'<a href="https://github.com/xmrig/xmrig/" class="C1 hov" target="_blank">XMRig</a> (CPU, Nvidia, AMD) - preferred<br>'+
+				'<a href="https://github.com/xmrig/xmrig/releases" class="C1 hov" target="_blank">XMRig</a> (CPU, Nvidia, AMD) - preferred<br>'+
 				'<a href="https://github.com/fireice-uk/xmr-stak/releases" class="C1 hov" target="_blank">XMR-Stak</a> (CPU, Nvidia, AMD)'+
 				'</p>'+
 			'</div>'+
