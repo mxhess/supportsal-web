@@ -1158,7 +1158,8 @@ function dta_Help(){
 						'<ul><li>443 Firewall bypass</li><li>8443 Firewall bypass</li></ul>'+
 					'</td>'+
 				'</tr></table></p>'+
-				'<p><b>Optional Fields</b><br>You can also set worker names or fixed difficulty through the configuration.</p>'+
+				'<p><b>Optional Fields</b><br>You can also set worker names or fixed difficulty through the configuration.<br>'+
+				'Be careful doing this. Too low of a difficulty causes shares to be submitted too fast and you might get banned.</p>'+
 				'<p>Standard wallet address<br><i>(e.g. miner.exe -u 43T...sUW -p Steve)</i></p>'+
 				'<p>Fixed difficulty of 3500 for the worker<br><i>(e.g. miner.exe -u 43T...sUW+3500 -p Steve)</i></p>'+
 			'</div>'+
