@@ -1145,7 +1145,7 @@ function dta_Help(){
 			'<div class="helptitle txtbig">Step 3 - Configure Settings<div class="btnback">'+$I['arrow']+'</div></div>'+
 			'<div class="helpteaser">Select a pool server and port and configure you miner.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>Each mining software will have it\'s own config, but they will all ask for similar information:</p>'+
+				'<p>Each mining software will have its own config, but they will all ask for similar information:</p>'+
 				'<p><b>Your Salvium Address</b><br>Often this will be labeled username, but check the instructions. You can specify a paymentID by using the following format: <i>address</i>.<i>paymentID</i></p>'+
 				'<p><b>Pool Address</b><br>The miner will want a url and a port, like this: pool.supportsal.com:3333<br>NOTE: all ports are ssl enabled</p>'+
 				'<p><table class="txtsmall C3'+mde+'"><tr>'+
