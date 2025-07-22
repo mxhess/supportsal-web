@@ -1168,7 +1168,7 @@ function dta_Help(){
 			'<div class="helptitle txtbig">Step 4 - Start Mining<div class="btnback">'+$I['arrow']+'</div></div>'+
 			'<div class="helpteaser">Launch the miner and learn more.</div>'+
 			'<div class="helpcontent hide">'+
-				'<p>This pool uses PPLNS to determine payouts. It helps to combat pool hopping and ensures a good payout for miners.</p>'+
+				'<p>This pool uses RBPPS (it\'s kind of like PPLNS but with block validation) to determine payouts. It helps to combat pool hopping and ensures a good payout for miners.</p>'+
 				'<p>'+Perc('0.7')+' Pool Fee</p>'+
 				'<p>0.1 SAL Default Payout</p>'+
 				'<p>60 Block Confirmation Time</p>'+
@@ -1609,7 +1609,7 @@ function Graph_Net(){
 			ins += ' '+right_x+','+$P['p'][0]['y']+'" />';
 			if(fullsize === 'y'){
 				pmid = (right_x + plft) / 2;
-				ins += '<text x="'+pmid+'" y="'+($P['n'][0]['y'] + 14)+'" text-anchor="middle" class="C0fl'+mde+' txttny o9"><tspan x="'+pmid+'">PPLNS</tspan><tspan x="'+pmid+'" dy="10">Window</tspan></text>';
+				ins += '<text x="'+pmid+'" y="'+($P['n'][0]['y'] + 14)+'" text-anchor="middle" class="C0fl'+mde+' txttny o9"><tspan x="'+pmid+'">RBPPS</tspan><tspan x="'+pmid+'" dy="10">Window</tspan></text>';
 			}
 		}
 		
