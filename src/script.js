@@ -15,7 +15,7 @@ var	mde = 'd',
 			'blk':2,												//blocktime in minutes
 			'reg':/^SaLv[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}$/    //address regex
 		},
-		'api':'https://www.supportsal.com/api/',
+		'api':'https://www.supportsal.com/api',
 		//'api':'http://74.208.99.57/api/',
 		'explorer':'https://explorer.salvium.io',
 		'explorertx':'https://explorer.salvium.io/tx/',
@@ -1190,29 +1190,29 @@ var api = function(m, key, xid){
 	if(m === 'news' && now > ($U['news'] + 3600)){
 		url = 'pool/motd';
 	}else if(m === 'block'){
-		url = 'pool/blocks?limit=100';
+		url = 'get_blocks?limit=100';  // was 'pool/blocks?limit=100'
 	}else if(m === 'blockhistory'){
-		url = 'pool/blocks?page='+(key - 1)+'&limit='+xid;
+		url = 'get_blocks?page=' + (key - 1) + '&limit=' + xid;  // was 'pool/blocks?page=...'
 	}else if(m === 'net' && now > ($U['net'] + 180)){
-		url = 'network/chart/difficulty?timeScale=20';
+		url = 'stats';  // was 'network/chart/difficulty?timeScale=20'
 	}else if(m === 'pool' && now > ($U['pool'] + 180)){
-		url = 'pool/chart/hashrate?timeScale=20';
+		url = 'stats';  // was 'pool/chart/hashrate?timeScale=20'
 	}else if(m === 'netheight' && now > ($U['netheight'] + 180)){
-		url = 'network/stats';
+		url = 'stats';
 	}else if(m === 'poolpay'){
-		url = 'pool/payments?page='+((key - 1) * xid)+'&limit='+xid;
+		url = 'get_payments?page='+((key - 1) * xid)+'&limit='+xid;  // was 'pool/payments...'
 	}else if(m === 'poolstats' && now > ($U['poolstats'] + 180)){
-		url = 'pool/stats';
+		url = 'stats';
 	}else if(m === 'account'){
-		url = 'miner/'+addr+'/stats';
+		url = 'stats_address?address=' + addr;  // was 'miner/'+addr+'/stats'
 	}else if(m === 'pay'){
-		url = 'miner/'+key+'/payments';
+		url = 'get_payments?address=' + key;  // was 'miner/'+key+'/payments'
 		if(xid){
 			xid = (xid > 1) ? (xid - 1) * 10 : 0;
-			url += '?page='+xid+'&limit=10';
+			url += '&page=' + xid + '&limit=10';
 		}
 	}else if(m === 'workers' && (isEmpty($A[addr]['wrkrs']) || now > ($A[addr]['wrkrs_updt'] + 120))){
-		url = 'miner/'+addr+'/identifiers';
+		url = 'stats_address?address=' + addr;  // was 'miner/'+addr+'/identifiers'
 	}else if(m === 'minershash'){
 		url = 'miner/'+addr+'/chart/hashrate/';
 	}else if(m === 'worker' && $A[addr] && $A[addr]['wrkrs'][key]){
