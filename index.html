@@ -2197,7 +2197,7 @@
                 return;
             }
 
-            const cards = ['hashrate-card', 'shares-card', 'pending-card', 'paid-card'];
+            const cards = ['hashrate-card', 'pending-card', 'paid-card'];
             cards.forEach(id => {
                 document.getElementById(id).classList.remove('hide');
             });
@@ -2208,7 +2208,6 @@
             const stats = data.stats || data;
             
             document.getElementById('miner-hashrate').textContent = formatHashrate(stats.hashrate || 0);
-            document.getElementById('miner-shares').textContent = formatNumber(stats.validShares || stats.totalShares || 0);
             
             const balance = stats.balance || stats.pending || stats.amtDue || 0;
             document.getElementById('miner-pending').textContent = formatSAL(balance);
@@ -2278,8 +2277,6 @@
                     displayName = displayName.substring(0, 22) + '...';
                 }
                 
-                const workerHashes = stats.hashes || 0;
-                
                 return `
                     <div class="worker-card">
                         <div class="worker-name">${displayName}</div>
@@ -2289,16 +2286,16 @@
                                 <span class="worker-stat-value">${formatHashrate(stats.hashrate || 0)}</span>
                             </div>
                             <div class="worker-stat">
-                                <span class="worker-stat-label">Hashes:</span>
-                                <span class="worker-stat-value">${formatNumber(workerHashes)}</span>
+                                <span class="worker-stat-label">1h Avg Rate:</span>
+                                <span class="worker-stat-value">${formatHashrate(stats.hashrate_1h || 0)}</span>
                             </div>
                             <div class="worker-stat">
                                 <span class="worker-stat-label">Last Share:</span>
                                 <span class="worker-stat-value">${stats.lastShare ? timeAgo(stats.lastShare) : 'Never'}</span>
                             </div>
                             <div class="worker-stat">
-                                <span class="worker-stat-label">1h Avg Rate:</span>
-                                <span class="worker-stat-value">${formatHashrate(stats.hashrate_1h || 0)}</span>
+                                <span class="worker-stat-label">6h Avg Rate:</span>
+                                <span class="worker-stat-value">${formatHashrate(stats.hashrate_6h || 0)}</span>
                             </div>
                         </div>
                     </div>
@@ -2330,7 +2327,7 @@
         }
 
         function hideMinerStats() {
-            const cards = ['hashrate-card', 'shares-card', 'pending-card', 'paid-card'];
+            const cards = ['hashrate-card', 'pending-card', 'paid-card'];
             cards.forEach(id => {
                 document.getElementById(id).classList.add('hide');
             });
