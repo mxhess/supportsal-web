@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupportSAL - Salvium Mining Pool</title>
     <style>
+        /* Import your existing design system */
         @font-face {
             font-family: 'GothamCondensed';
             src: url('src/font/GothamCondensed-Medium.woff2') format('woff2'),
@@ -13,11 +14,27 @@
             font-style: normal;
         }
 
+        /* Your color system */
+        .C0l { color: #181C24 }
+        .C0d { color: #F7F8FA }
+        .C0bkl { background-color: #F7F8FA }
+        .C0bkd { background-color: #181C24 }
         .C1 { color: #40E0D0 }
+        .C1fl { fill: #40E0D0 }
+        .C1bk { background-color: #40E0D0 }
+        .C1br { border-color: rgba(64, 224, 208, 0.7) }
         .C2 { color: #818181 }
+        .C2bk { background-color: #818181 }
+        .C3l { color: #454545 }
+        .C3d { color: #B3B3B3 }
         .C4 { color: rgba(203, 10, 10, 0.9) }
+        .C4bk { background-color: rgba(203, 10, 10, 0.9) }
+        .C5 { color: rgba(95, 155, 45, 0.9) }
+        .C5bk { background-color: rgba(95, 155, 45, 0.9) }
         .C6 { color: #0AEB85 }
+        .C6bk { background-color: #0AEB85 }
 
+        /* Base */
         * {
             margin: 0;
             padding: 0;
@@ -32,6 +49,7 @@
             color: #181C24;
             min-height: 100vh;
             transition: all 0.3s ease;
+            padding-bottom: 80px; /* Space for bottom nav */
         }
 
         body.dark {
@@ -39,9 +57,21 @@
             color: #F7F8FA;
         }
 
+        /* Your text system */
+        .txtbig {
+            font-family: 'GothamCondensed', Helvetica, sans-serif;
+            font-size: 28px;
+        }
+
         .txtmed {
             font-family: 'GothamCondensed', Helvetica, sans-serif;
             font-size: 20px;
+        }
+
+        .txt {
+            font-family: Tahoma, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 18px;
         }
 
         .txtsmall {
@@ -49,12 +79,37 @@
             line-height: 16px;
         }
 
+        .txttny {
+            font-size: 10px;
+            line-height: 12px;
+        }
+
+        /* Layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        .LR85 {
+            position: relative;
+            width: 85%;
+            left: 7.5%;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .mb-1 {
+            margin-bottom: 1rem;
+        }
+
+        /* Header - more subtle background */
         header {
             height: 44px;
             background: rgba(0, 0, 0, 0.03);
@@ -84,17 +139,21 @@
         #HeadLogo .support {
             font-family: 'GothamCondensed', sans-serif;
             font-size: 18px;
+            font-weight: 500;
             color: #40E0D0;
         }
 
         #HeadLogo .sal {
             font-family: 'GothamCondensed', sans-serif;
             font-size: 20px;
+            font-weight: 700;
             color: #40E0D0;
             margin-left: 3px;
         }
 
+        /* Your beloved green dot is back! */
         #HeadLogo .dot {
+            display: inline-block;
             width: 8px;
             height: 8px;
             background-color: #0AEB85;
@@ -139,6 +198,7 @@
             color: #40E0D0;
         }
 
+        /* Theme Toggle */
         #TogMode {
             width: 32px;
             height: 32px;
@@ -151,6 +211,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
         }
 
         #TogMode:hover {
@@ -158,6 +219,7 @@
             transform: scale(1.1);
         }
 
+        /* Sun icon for theme toggle */
         #TogMode .sun-icon {
             width: 18px;
             height: 18px;
@@ -188,23 +250,108 @@
                 linear-gradient(135deg, transparent 46%, #40E0D0 46%, #40E0D0 54%, transparent 54%);
         }
 
+        /* Moon icon for theme toggle */
         #TogMode .moon-icon {
             width: 18px;
             height: 18px;
             fill: #40E0D0;
+            transition: all 0.3s ease;
         }
 
+        /* Main Content */
         .main {
             padding: 2rem 0;
-            min-height: calc(100vh - 44px);
+            min-height: calc(100vh - 44px - 80px); /* Account for header and bottom nav */
         }
 
+        /* Centerpiece Graph Container */
+        .graph-section {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: inset 0px 25px 16px -22px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(64, 224, 208, 0.2);
+        }
+
+        body.dark .graph-section {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .graph-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .graph-title {
+            font-family: 'GothamCondensed', sans-serif;
+            font-size: 24px;
+            color: #40E0D0;
+            margin-bottom: 0.5rem;
+        }
+
+        .graph-subtitle {
+            font-size: 14px;
+            color: #818181;
+        }
+
+        .graph-container {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 5px;
+            border: 1px solid rgba(64, 224, 208, 0.1);
+        }
+
+        body.dark .graph-container {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .graph-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 12px;
+            color: #818181;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .legend-network { background: #40E0D0; }
+        .legend-pool { background: #0AEB85; }
+        .legend-blocks { background: #0AEB85; }
+
+        /* Graph loading state */
+        .graph-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            color: #818181;
+            font-style: italic;
+        }
+
+        /* Address Section */
         .address-section {
             background: rgba(0, 0, 0, 0.03);
             border-radius: 5px;
             padding: 2rem;
             margin-bottom: 2rem;
             text-align: center;
+            box-shadow: inset 0px 25px 16px -22px rgba(0, 0, 0, 0.06);
         }
 
         body.dark .address-section {
@@ -259,13 +406,14 @@
             background: transparent;
             border: none;
             cursor: pointer;
+            padding: 2px;
+            transition: all 0.3s ease;
             opacity: 0;
             pointer-events: none;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 5;
-            transition: all 0.3s ease;
         }
 
         .address-gear.show {
@@ -277,12 +425,18 @@
             transform: translateY(-50%) rotate(90deg);
         }
 
+        .address-gear.active {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
         .address-gear svg {
             width: 18px;
             height: 18px;
             fill: #40E0D0;
+            transition: all 0.3s ease;
         }
 
+        /* Payout Settings Popup */
         .payout-popup {
             position: absolute;
             top: 100%;
@@ -309,6 +463,24 @@
 
         body.dark .payout-popup {
             background: #181C24;
+            border-color: rgba(64, 224, 208, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .payout-popup::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 40px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #F7F8FA;
+        }
+
+        body.dark .payout-popup::before {
+            border-bottom-color: #181C24;
         }
 
         .payout-controls {
@@ -326,11 +498,17 @@
             border-radius: 5px;
             color: #181C24;
             width: 120px;
+            font-family: Tahoma, Helvetica, sans-serif;
         }
 
         body.dark .payout-input {
             background-color: #181C24;
             color: #F7F8FA;
+        }
+
+        .payout-input:focus {
+            outline: none;
+            border-color: #40E0D0;
         }
 
         .payout-btn {
@@ -354,6 +532,15 @@
             cursor: not-allowed;
         }
 
+        .instant-payout-btn {
+            background: #0AEB85;
+        }
+
+        .instant-payout-btn:hover {
+            background: #40E0D0;
+        }
+
+        /* Address stats */
         .address-stats {
             display: flex;
             justify-content: center;
@@ -387,6 +574,7 @@
             text-transform: uppercase;
         }
 
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -400,6 +588,7 @@
             padding: 1.5rem;
             text-align: center;
             border-left: 4px solid #40E0D0;
+            box-shadow: inset 0px 25px 16px -22px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
         }
 
@@ -416,19 +605,22 @@
             margin-bottom: 0.5rem;
             font-size: 10px;
             text-transform: uppercase;
+            font-family: Tahoma, Helvetica, sans-serif;
         }
 
         .stat-card .value {
-            font-family: 'GothamCondensed', sans-serif;
+            font-family: 'GothamCondensed', Helvetica, sans-serif;
             font-size: 20px;
             font-weight: bold;
         }
 
+        /* Workers Section */
         .workers-section {
             background: rgba(0, 0, 0, 0.03);
             border-radius: 5px;
             padding: 2rem;
             margin-bottom: 2rem;
+            box-shadow: inset 0px 25px 16px -22px rgba(0, 0, 0, 0.06);
         }
 
         body.dark .workers-section {
@@ -454,7 +646,7 @@
 
         .workers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1rem;
             max-height: 400px;
             overflow-y: auto;
@@ -462,6 +654,7 @@
 
         .worker-card {
             background: rgba(0, 0, 0, 0.03);
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.04) 0, rgba(0, 0, 0, 0.02) 20%, rgba(0, 0, 0, 0.01) 80%, rgba(0, 0, 0, 0.03) 100%);
             border-radius: 3px;
             padding: 1rem;
             border-left: 3px solid #0AEB85;
@@ -470,12 +663,18 @@
 
         body.dark .worker-card {
             background: rgba(255, 255, 255, 0.03);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0.01) 80%, rgba(255, 255, 255, 0.03) 100%);
+        }
+
+        .worker-card.offline {
+            border-left-color: #818181;
+            opacity: 0.6;
         }
 
         .worker-name {
             font-weight: bold;
             margin-bottom: 0.5rem;
-            font-family: 'GothamCondensed', sans-serif;
+            font-family: 'GothamCondensed', Helvetica, sans-serif;
             font-size: 16px;
             color: #40E0D0;
         }
@@ -508,10 +707,12 @@
             color: #181C24;
         }
 
+        /* Blocks Section */
         .blocks-section {
             background: rgba(0, 0, 0, 0.03);
             border-radius: 5px;
             padding: 2rem;
+            box-shadow: inset 0px 25px 16px -22px rgba(0, 0, 0, 0.06);
         }
 
         body.dark .blocks-section {
@@ -538,16 +739,20 @@
             background: rgba(64, 224, 208, 0.1);
         }
 
+        .block-item.orphaned {
+            border-left-color: rgba(203, 10, 10, 0.9);
+        }
+
         .block-height {
             font-weight: bold;
             color: #40E0D0;
-            font-family: 'GothamCondensed', sans-serif;
+            font-family: 'GothamCondensed', Helvetica, sans-serif;
         }
 
         .block-reward {
             color: #0AEB85;
             font-weight: bold;
-            font-family: 'GothamCondensed', sans-serif;
+            font-family: 'GothamCondensed', Helvetica, sans-serif;
         }
 
         .block-time {
@@ -555,6 +760,280 @@
             font-size: 12px;
         }
 
+        .activity-type {
+            font-weight: bold;
+            color: #40E0D0;
+            font-family: 'GothamCondensed', Helvetica, sans-serif;
+        }
+
+        .activity-details {
+            color: #818181;
+            font-size: 12px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 1px solid rgba(64, 224, 208, 0.3);
+            padding: 1rem 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        body.dark .bottom-nav {
+            background: rgba(24, 28, 36, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: #818181;
+            text-decoration: none;
+            font-family: 'GothamCondensed', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #40E0D0;
+            background: rgba(64, 224, 208, 0.1);
+        }
+
+        .nav-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #0AEB85;
+            border-radius: 50%;
+            margin: 0 1rem;
+            vertical-align: middle;
+        }
+
+        /* Full-screen overlays */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.show {
+            display: flex;
+        }
+
+        .overlay-content {
+            background: #F7F8FA;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            margin: 20px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark .overlay-content {
+            background: #181C24;
+        }
+
+        .overlay-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #818181;
+            transition: color 0.3s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay-close:hover {
+            color: #40E0D0;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        body.dark .data-table {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+
+        body.dark .data-table th,
+        body.dark .data-table td {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .data-table th {
+            background: rgba(64, 224, 208, 0.1);
+            font-family: 'GothamCondensed', sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            color: #40E0D0;
+            text-transform: uppercase;
+        }
+
+        .data-table tr:hover {
+            background: rgba(64, 224, 208, 0.05);
+        }
+
+        .data-table .effort-high {
+            color: rgba(203, 10, 10, 0.9);
+            font-weight: bold;
+        }
+
+        .data-table .effort-normal {
+            color: #0AEB85;
+        }
+
+        .data-table .effort-low {
+            color: #40E0D0;
+        }
+
+        .explorer-link {
+            color: #40E0D0;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .explorer-link:hover {
+            color: #0AEB85;
+            text-decoration: underline;
+        }
+
+        /* Help sections */
+        .help-section {
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .help-header {
+            background: rgba(64, 224, 208, 0.1);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-family: 'GothamCondensed', sans-serif;
+            font-size: 18px;
+            color: #40E0D0;
+        }
+
+        .help-header:hover {
+            background: rgba(64, 224, 208, 0.15);
+        }
+
+        .help-header .arrow {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .help-header.expanded .arrow {
+            transform: rotate(180deg);
+        }
+
+        .help-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .help-content.expanded {
+            padding: 1.5rem;
+            max-height: 1000px;
+        }
+
+        .help-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .help-content ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .help-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .help-content code {
+            background: rgba(64, 224, 208, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .help-content .config-example {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            border-radius: 5px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        body.dark .help-content .config-example {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Loading */
         .loading {
             text-align: center;
             color: #818181;
@@ -562,6 +1041,7 @@
             padding: 2rem;
         }
 
+        /* Error */
         .error {
             background: rgba(203, 10, 10, 0.9);
             color: white;
@@ -571,91 +1051,134 @@
             text-align: center;
         }
 
+        /* Message */
+        .message {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 5px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-left: 4px solid #40E0D0;
+        }
+
+        body.dark .message {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
         .mt-1 {
             margin-top: 1rem;
         }
 
-        /* Pool Performance Chart */
-        .graph-section {
-            background: rgba(0, 0, 0, 0.03);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            box-shadow: inset 0px 25px 16px -22px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(64, 224, 208, 0.2);
+        /* Tooltip for graph */
+        .graph-tooltip {
+            position: absolute;
+            background: rgba(24, 28, 36, 0.95);
+            color: #F7F8FA;
+            padding: 0.75rem;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #40E0D0;
+            backdrop-filter: blur(10px);
         }
 
-        body.dark .graph-section {
-            background: rgba(255, 255, 255, 0.03);
+        body.dark .graph-tooltip {
+            background: rgba(247, 248, 250, 0.95);
+            color: #181C24;
         }
 
-        .graph-header {
-            text-align: center;
-            margin-bottom: 0.5rem;
+        .graph-tooltip.show {
+            opacity: 1;
         }
 
-        .graph-title {
-            font-family: 'GothamCondensed', sans-serif;
-            font-size: 18px;
+        .tooltip-time {
+            font-weight: bold;
             color: #40E0D0;
             margin-bottom: 0.25rem;
         }
 
-        .graph-subtitle {
-            font-size: 12px;
-            color: #818181;
+        .tooltip-effort {
+            color: #0AEB85;
+            margin-bottom: 0.25rem;
         }
 
-        .graph-container {
-            position: relative;
+        .tooltip-link {
+            color: #40E0D0;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* SVG Styles */
+        .graph-svg {
             width: 100%;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 5px;
-            border: 1px solid rgba(64, 224, 208, 0.1);
+            height: 100%;
         }
 
-        body.dark .graph-container {
-            background: rgba(255, 255, 255, 0.02);
+        .line-network {
+            fill: none;
+            stroke: #40E0D0;
+            stroke-width: 2;
         }
 
-        .graph-legend {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 0.5rem;
-            flex-wrap: wrap;
+        .line-pool {
+            fill: none;
+            stroke: #0AEB85;
+            stroke-width: 2;
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .block-marker {
+            fill: #0AEB85;
+            stroke: #40E0D0;
+            stroke-width: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .block-marker:hover {
+            fill: #40E0D0;
+            stroke: #0AEB85;
+            r: 6;
+        }
+
+        .grid-line {
+            stroke: rgba(129, 129, 129, 0.2);
+            stroke-width: 1;
+        }
+
+        .axis-text {
+            fill: #818181;
             font-size: 11px;
-            color: #818181;
+            font-family: Tahoma, sans-serif;
         }
 
-        .legend-color {
-            width: 12px;
-            height: 3px;
-            border-radius: 2px;
-        }
-
-        .legend-pool { 
-            background: #0AEB85; 
-        }
-
-        .graph-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px;
-            color: #818181;
-            font-style: italic;
+        .axis-label {
+            fill: #40E0D0;
             font-size: 12px;
+            font-family: 'GothamCondensed', sans-serif;
+            font-weight: bold;
         }
 
-        @media (max-width: 750px) {
+        /* Animations */
+        .preload {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive - using your breakpoints */
+        @media all and (max-width: 900px) {
+            .txtbig { font-size: 24px; }
+            .txtmed { font-size: 18px; }
+            .pool-stats { gap: 1rem; }
+            .container { padding: 0 10px; }
+        }
+
+        @media all and (max-width: 750px) {
             .header-content {
                 flex-direction: column;
                 height: auto;
@@ -668,11 +1191,43 @@
                 flex-wrap: wrap;
                 gap: 1rem;
             }
+            
+            .nav-container {
+                gap: 1rem;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+                padding: 0.5rem;
+            }
+            
+            .nav-dot {
+                margin: 0 0.5rem;
+                width: 4px;
+                height: 4px;
+            }
+            
+            .overlay-content {
+                padding: 1rem;
+                margin: 10px;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 0.5rem;
+                font-size: 12px;
+            }
         }
 
-        @media (max-width: 600px) {
+        @media all and (max-width: 600px) {
             .workers-grid {
                 grid-template-columns: 1fr;
+            }
+            .pool-stats {
+                gap: 0.5rem;
+            }
+            .pool-stat {
+                font-size: 12px;
             }
         }
     </style>
@@ -709,7 +1264,7 @@
                         <div class="pool-stat-label">Height</div>
                     </div>
                     <div class="pool-stat">
-                        <div class="pool-stat-value clickable" id="last-block">--</div>
+                        <div class="pool-stat-value clickable" id="last-block" title="Click to view recent blocks">--</div>
                         <div class="pool-stat-label">Last Block</div>
                     </div>
                 </div>
@@ -723,26 +1278,35 @@
 
     <main class="main">
         <div class="container">
-            <!-- Pool Performance Chart -->
+            <!-- Centerpiece Graph -->
             <section class="graph-section">
                 <div class="graph-header">
-                    <h2 class="graph-title">Pool Performance</h2>
-                    <p class="graph-subtitle">Pool hashrate activity over time</p>
+                    <h2 class="graph-title" id="chart-title">Pool Performance - Last 8 Hours</h2>
+                    <p class="graph-subtitle" id="chart-subtitle">Network hashrate, pool hashrate, and blocks found</p>
                 </div>
                 <div class="graph-container" id="graph-container">
-                    <div class="graph-loading">Loading mining charts...</div>
+                    <div class="graph-loading" id="chart-loading">Loading performance data...</div>
+                    <canvas id="hashrate-chart" style="display: none; width: 100%; height: 150px;"></canvas>
                 </div>
                 <div class="graph-legend">
                     <div class="legend-item">
+                        <div class="legend-color legend-network"></div>
+                        <span id="legend-text">Network Hashrate</span>
+                    </div>
+                    <div class="legend-item">
                         <div class="legend-color legend-pool"></div>
                         <span>Pool Hashrate</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-blocks"></div>
+                        <span>Blocks Found</span>
                     </div>
                 </div>
             </section>
 
             <!-- Address Input -->
             <section class="address-section">
-                <h2 class="txtmed">Enter Your Salvium Address</h2>
+                <h2 class="txtmed mb-1">Enter Your Salvium Address</h2>
                 <div class="address-controls">
                     <input 
                         type="text" 
@@ -757,19 +1321,22 @@
                         </svg>
                     </button>
                     
+                    <!-- Payout Popup -->
                     <div class="payout-popup" id="payout-popup">
-                        <h3 class="txtmed C1">Payout Settings</h3>
+                        <h3 class="txtmed mb-1 C1">Payout Settings</h3>
                         <div class="payout-controls">
                             <span class="txtsmall">Minimum payout:</span>
                             <input 
                                 type="number" 
                                 id="payout-threshold" 
                                 class="payout-input" 
-                                placeholder="0.100000"
+                                placeholder="0.1"
                                 step="0.01"
-                                min="0.1"
+                                min="0.01"
                             >
                             <span class="txtsmall">SAL</span>
+                            <button id="set-threshold-btn" class="payout-btn">Set Threshold</button>
+                            <button id="instant-payout-btn" class="payout-btn instant-payout-btn">Request Payout</button>
                         </div>
                         <div class="payout-controls" style="margin-top: 1rem;">
                             <span class="txtsmall">Worker IP:</span>
@@ -783,11 +1350,10 @@
                             <span class="txtsmall C2" style="margin-left: 0.5rem;">
                                 Your IP: <span id="user-ip" style="color: #40E0D0; cursor: pointer;" title="Click to use this IP">Loading...</span>
                             </span>
-                            <button id="set-threshold-btn" class="payout-btn">Set Threshold</button>
                         </div>
                         <p class="mt-1 txtsmall C2">
                             Current balance: <span id="current-balance">-- SAL</span> | 
-                            Your threshold: <span id="current-threshold">-- SAL</span>
+                            Threshold: <span id="current-threshold">-- SAL</span>
                         </p>
                         <p class="txtsmall C2" style="margin-top: 0.5rem;">
                             <strong>Note:</strong> Enter the IP address of a worker that has submitted shares to this pool.
@@ -795,6 +1361,7 @@
                     </div>
                 </div>
                 
+                <!-- Address Stats -->
                 <div class="address-stats" id="address-stats">
                     <div class="address-stat">
                         <div class="address-stat-value" id="sal-pending">-- SAL</div>
@@ -844,7 +1411,7 @@
                 </div>
             </section>
 
-            <!-- Recent Blocks -->
+            <!-- Recent Activity / Blocks -->
             <section class="blocks-section">
                 <div class="section-header">
                     <h2 class="txtmed" id="activity-title">Recent Blocks</h2>
@@ -859,7 +1426,207 @@
         </div>
     </main>
 
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-item active" id="nav-home">HOME</a>
+            <span class="nav-dot"></span>
+            <a href="#" class="nav-item" id="nav-blocks">BLOCKS</a>
+            <span class="nav-dot"></span>
+            <a href="#" class="nav-item" id="nav-payments">PAYMENTS</a>
+            <span class="nav-dot"></span>
+            <a href="#" class="nav-item" id="nav-help">HELP</a>
+        </div>
+    </nav>
+
+    <!-- Blocks Overlay -->
+    <div id="blocks-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="overlay-close">&times;</button>
+            <h2 class="txtbig C1">Pool Blocks</h2>
+            <p class="C2">Recent blocks found by the pool with detailed information</p>
+            
+            <div id="blocks-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Block Mined</th>
+                            <th>Maturity</th>
+                            <th>Effort</th>
+                            <th>Reward (SAL)</th>
+                            <th>Height</th>
+                            <th>Transaction</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blocks-table-body">
+                        <tr>
+                            <td colspan="6" class="loading">Loading blocks...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payments Overlay -->
+    <div id="payments-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="overlay-close">&times;</button>
+            <h2 class="txtbig C1">Pool Payments</h2>
+            <p class="C2">Recent payments made by the pool to miners</p>
+            
+            <div id="payments-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Payment Sent</th>
+                            <th>Payees</th>
+                            <th>Amount (SAL)</th>
+                            <th>Fee (SAL)</th>
+                            <th>Transaction</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payments-table-body">
+                        <tr>
+                            <td colspan="5" class="loading">Loading payments...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Overlay -->
+    <div id="help-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="overlay-close">&times;</button>
+            <h2 class="txtbig C1">Getting Started with SupportSAL Pool</h2>
+            <p class="C2">Everything you need to start mining Salvium on our pool</p>
+
+            <!-- Step 1: Install Wallet -->
+            <div class="help-section">
+                <div class="help-header" data-section="wallet">
+                    <span>Step 1 - Install Wallet & Create Address</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="help-content">
+                    <p>Start here if you need a Salvium address and wallet:</p>
+                    <ul>
+                        <li>Download the official <strong>Salvium Wallet</strong> from the official website</li>
+                        <li>Create a new wallet and securely backup your seed phrase</li>
+                        <li>Your Salvium address will start with <code>SaLv</code> and be 98 characters long</li>
+                        <li>Keep your wallet synchronized to receive mining payments</li>
+                    </ul>
+                    <p><strong>Important:</strong> Never share your private keys or seed phrase with anyone!</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Install Mining Software -->
+            <div class="help-section">
+                <div class="help-header" data-section="software">
+                    <span>Step 2 - Install Mining Software</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="help-content">
+                    <p>We recommend using <strong>XMRig</strong> for mining Salvium:</p>
+                    <ul>
+                        <li><strong>XMRig</strong> - Best performance for CPU and GPU mining</li>
+                        <li><strong>xmr-stak-cpu</strong> - Alternative CPU miner</li>
+                        <li>Download from official sources only to avoid malware</li>
+                        <li>Windows Defender may flag miners as false positives - add exclusions</li>
+                    </ul>
+                    <p>XMRig supports both CPU and GPU mining with excellent optimization for RandomX algorithm.</p>
+                </div>
+            </div>
+
+            <!-- Step 3: Configure Settings -->
+            <div class="help-section">
+                <div class="help-header" data-section="config">
+                    <span>Step 3 - Configure Settings</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="help-content">
+                    <p>Configure your miner with these pool details:</p>
+                    
+                    <h4 class="C1">Pool Address:</h4>
+                    <code>pool.supportsal.com</code>
+                    
+                    <h4 class="C1">Port Descriptions:</h4>
+                    <ul>
+                        <li><strong>3333</strong> - Low-end hardware (50K difficulty)</li>
+                        <li><strong>4444</strong> - Mid-range hardware (250K difficulty)</li>
+                        <li><strong>5555</strong> - High-end hardware (800K difficulty)</li>
+                        <li><strong>7777</strong> - Cloud mining/NiceHash (2M difficulty)</li>
+                    </ul>
+
+                    <h4 class="C1">XMRig Configuration Example:</h4>
+                    <div class="config-example">{
+    "pools": [
+        {
+            "algo": "rx/0",
+            "coin": "salvium",
+            "url": "pool.supportsal.com:4444",
+            "user": "SaLv...(your wallet address)",
+            "pass": "x",
+            "rig-id": "worker1",
+            "keepalive": true,
+            "enabled": true
+        }
+    ]
+}</div>
+
+                    <h4 class="C1">Command Line Example:</h4>
+                    <code>xmrig -o pool.supportsal.com:4444 -u SaLv...(your wallet address) -p x</code>
+
+                    <p><strong>Your Salvium Address:</strong> Enter your full Salvium wallet address as the username</p>
+                    <p><strong>Worker Name:</strong> Optionally add a worker name: <code>youraddress.workername</code></p>
+                </div>
+            </div>
+
+            <!-- Step 4: Start Mining -->
+            <div class="help-section">
+                <div class="help-header" data-section="mining">
+                    <span>Step 4 - Start Mining</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="help-content">
+                    <p>Launch your miner and start earning Salvium:</p>
+                    <ul>
+                        <li>Run your configured miner software</li>
+                        <li>Check that you're connecting successfully to the pool</li>
+                        <li>Enter your Salvium address on this website to track your stats</li>
+                        <li>It takes about 2 hours for your balance to start showing (blocks need confirmation)</li>
+                    </ul>
+                    
+                    <h4 class="C1">Pool Details:</h4>
+                    <ul>
+                        <li><strong>Pool Fee:</strong> 0.7%</li>
+                        <li><strong>Default Payout:</strong> 0.1 SAL minimum</li>
+                        <li><strong>Block Confirmation:</strong> 60 blocks</li>
+                        <li><strong>Payment System:</strong> RBPPS (Round Based Pay Per Share)</li>
+                    </ul>
+
+                    <h4 class="C1">Need Help?</h4>
+                    <p>Join our community for support:</p>
+                    <ul>
+                        <li>Visit <code>support@supportsal.com</code> for technical issues</li>
+                        <li>Check our FAQ and documentation</li>
+                        <li>Connect with other miners in our community chat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graph Tooltip -->
+    <div id="graph-tooltip" class="graph-tooltip">
+        <div class="tooltip-time"></div>
+        <div class="tooltip-effort"></div>
+        <div class="tooltip-link"></div>
+    </div>
+
     <script>
+        // Configuration - detect if we're in production or development
         const CONFIG = {
             apiUrl: window.location.hostname === 'www.supportsal.com' || window.location.hostname === 'supportsal.com' 
                 ? '/api' 
@@ -870,11 +1637,427 @@
             isProduction: window.location.hostname === 'www.supportsal.com' || window.location.hostname === 'supportsal.com'
         };
 
+        // State
         let currentAddress = '';
         let updateTimer = null;
+        let graphTimer = null;
         let poolData = null;
         let isDarkMode = true;
+        let graphData = null;
+        let currentNav = 'home';
+        let hashrateChart = null;
 
+        // Navigation functions
+        function showNav(navItem) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.getElementById(`nav-${navItem}`).classList.add('active');
+            currentNav = navItem;
+        }
+
+        function showOverlay(overlayId) {
+            document.getElementById(overlayId).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideOverlay(overlayId) {
+            document.getElementById(overlayId).classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function hideAllOverlays() {
+            document.querySelectorAll('.overlay').forEach(overlay => {
+                overlay.classList.remove('show');
+            });
+            document.body.style.overflow = '';
+        }
+
+        // Chart drawing function (using Canvas API as fallback)
+        function drawChart(ctx, canvas, labels, values, type) {
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 20;
+            const leftPadding = 50; // Extra space for Y-axis labels
+            const chartWidth = width - leftPadding - padding;
+            const chartHeight = height - (padding * 2);
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Set colors based on theme
+            const lineColor = type === 'network' ? '#40E0D0' : '#0AEB85';
+            const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            const textColor = isDarkMode ? '#818181' : '#666';
+            
+            // Find min and max values for scaling
+            const maxValue = Math.max(...values);
+            const minValue = Math.min(...values);
+            const valueRange = maxValue - minValue || 1;
+            
+            // Draw grid lines
+            ctx.strokeStyle = gridColor;
+            ctx.lineWidth = 0.5;
+            ctx.setLineDash([2, 2]);
+            
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (i * chartHeight / 4);
+                ctx.beginPath();
+                ctx.moveTo(leftPadding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+            
+            // Reset line dash for chart line
+            ctx.setLineDash([]);
+            
+            // Draw the chart line
+            if (values.length > 1) {
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                for (let i = 0; i < values.length; i++) {
+                    const x = leftPadding + (i * chartWidth / (values.length - 1));
+                    const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
+                    const y = height - padding - (normalizedValue * chartHeight);
+                    
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                
+                ctx.stroke();
+                
+                // Add dots at data points
+                ctx.fillStyle = lineColor;
+                for (let i = 0; i < values.length; i++) {
+                    const x = leftPadding + (i * chartWidth / (values.length - 1));
+                    const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
+                    const y = height - padding - (normalizedValue * chartHeight);
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                
+                // Add area fill under the line
+                ctx.globalAlpha = 0.2;
+                ctx.fillStyle = lineColor;
+                ctx.beginPath();
+                
+                ctx.moveTo(leftPadding, height - padding);
+                const firstNormalizedValue = valueRange > 0 ? (values[0] - minValue) / valueRange : 0.5;
+                const firstY = height - padding - (firstNormalizedValue * chartHeight);
+                ctx.lineTo(leftPadding, firstY);
+                
+                for (let i = 0; i < values.length; i++) {
+                    const x = leftPadding + (i * chartWidth / (values.length - 1));
+                    const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
+                    const y = height - padding - (normalizedValue * chartHeight);
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.lineTo(width - padding, height - padding);
+                ctx.closePath();
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+            
+            // Draw Y-axis labels with proper values
+            ctx.fillStyle = textColor;
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'right';
+            
+            for (let i = 0; i <= 4; i++) {
+                const value = minValue + (i * valueRange / 4);
+                const y = height - padding - (i * chartHeight / 4);
+                
+                // Format hashrate properly for Y-axis
+                let formattedValue;
+                if (value === 0) {
+                    formattedValue = '0';
+                } else if (value < 1000) {
+                    formattedValue = Math.round(value).toString();
+                } else if (value < 1000000) {
+                    formattedValue = (value / 1000).toFixed(1) + 'K';
+                } else if (value < 1000000000) {
+                    formattedValue = (value / 1000000).toFixed(1) + 'M';
+                } else {
+                    formattedValue = (value / 1000000000).toFixed(1) + 'G';
+                }
+                
+                ctx.fillText(formattedValue, leftPadding - 8, y + 3);
+            }
+            
+            // Draw X-axis labels
+            ctx.textAlign = 'center';
+            const labelStep = Math.max(1, Math.floor(labels.length / 6));
+            
+            for (let i = 0; i < labels.length; i += labelStep) {
+                const x = leftPadding + (i * chartWidth / (labels.length - 1));
+                ctx.fillText(labels[i], x, height - 5);
+            }
+        }
+
+        // Graph functions
+        async function fetchGraphData() {
+            try {
+                const response = await fetch(`${CONFIG.apiUrl}/stats`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const data = await response.json();
+                poolData = data;
+                
+                if (data.charts) {
+                    graphData = data.charts;
+                    updateGraph();
+                } else {
+                    generateDemoGraphData();
+                    updateGraph();
+                }
+            } catch (error) {
+                console.error('Failed to fetch graph data:', error);
+                if (!CONFIG.isProduction) {
+                    if (!graphData) {
+                        generateDemoGraphData();
+                        updateGraph();
+                    }
+                }
+            }
+        }
+
+        function generateDemoGraphData() {
+            const now = Date.now();
+            const eightHoursAgo = now - (8 * 60 * 60 * 1000);
+            
+            graphData = {
+                hashrate: [],
+                difficulty: [],
+                networkHashrate: []
+            };
+            
+            for (let i = 0; i < 480; i++) {
+                const timestamp = eightHoursAgo + (i * 60 * 1000);
+                const poolHash = 50000 + Math.sin(i / 60) * 20000 + Math.random() * 10000;
+                const networkHash = 2000000 + Math.sin(i / 120) * 500000 + Math.random() * 100000;
+                const difficulty = networkHash * 120;
+                
+                graphData.hashrate.push([timestamp / 1000, poolHash, 0]);
+                graphData.networkHashrate.push([timestamp / 1000, networkHash, 0]);
+                graphData.difficulty.push([timestamp / 1000, difficulty, 0]);
+            }
+        }
+
+        function updateGraph() {
+            const canvas = document.getElementById('hashrate-chart');
+            const ctx = canvas.getContext('2d');
+            const loadingDiv = document.getElementById('chart-loading');
+            const container = document.getElementById('graph-container');
+            
+            const containerRect = container.getBoundingClientRect();
+            canvas.width = containerRect.width;
+            canvas.height = 150;
+            
+            if (currentAddress && graphData?.hashrate) {
+                document.getElementById('chart-title').textContent = 'Your Hashrate';
+                document.getElementById('chart-subtitle').textContent = 'Your mining hashrate over time';
+                document.getElementById('legend-text').textContent = 'Your Hashrate';
+            } else {
+                document.getElementById('chart-title').textContent = 'Network Hashrate';
+                document.getElementById('chart-subtitle').textContent = 'Network hashrate activity over time';
+                document.getElementById('legend-text').textContent = 'Network Hashrate';
+            }
+            
+            if (!graphData || graphData.hashrate?.length === 0) {
+                loadingDiv.style.display = 'block';
+                loadingDiv.textContent = 'No data available';
+                canvas.style.display = 'none';
+                return;
+            }
+            
+            const now = Date.now() / 1000;
+            const eightHoursAgo = now - (8 * 60 * 60);
+            
+            const recentData = (graphData.hashrate || [])
+                .filter(d => d[0] >= eightHoursAgo)
+                .slice(-16);
+            
+            const labels = recentData.map(point => {
+                const date = new Date(point[0] * 1000);
+                return date.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: false 
+                });
+            });
+            
+            const values = recentData.map(point => point[1] || 0);
+            
+            loadingDiv.style.display = 'none';
+            canvas.style.display = 'block';
+            
+            const type = currentAddress ? 'user' : 'network';
+            drawChart(ctx, canvas, labels, values, type);
+        }
+
+        // Blocks functions
+        async function fetchBlocksData() {
+            try {
+                const response = await fetch(`${CONFIG.apiUrl}/get_blocks?limit=50`);
+                const data = await response.json();
+                updateBlocksTable(data);
+            } catch (error) {
+                console.error('Failed to fetch blocks data:', error);
+                document.getElementById('blocks-table-body').innerHTML = 
+                    '<tr><td colspan="6" class="loading">Failed to load blocks data</td></tr>';
+            }
+        }
+
+        function updateBlocksTable(blocks) {
+            const tbody = document.getElementById('blocks-table-body');
+            
+            if (!blocks || !Array.isArray(blocks) || blocks.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="loading">No blocks found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = blocks.map(block => {
+                const minedTime = block.ts || block.timestamp;
+                const height = block.height || 0;
+                const reward = block.reward || block.value || 0;
+                const hash = block.hash || '';
+                const difficulty = block.difficulty || 0;
+                const shares = block.shares || 0;
+                
+                let effort = 0;
+                if (difficulty && shares) {
+                    effort = ((shares / difficulty) * 100);
+                }
+                
+                let effortClass = 'effort-normal';
+                if (effort > 150) effortClass = 'effort-high';
+                else if (effort < 75) effortClass = 'effort-low';
+                
+                const currentHeight = poolData?.network?.height || 0;
+                const blocksToGo = Math.max(0, 60 - (currentHeight - height));
+                const maturityText = blocksToGo > 0 ? `${blocksToGo} To Go` : 'Confirmed';
+                
+                return `
+                    <tr>
+                        <td>${timeAgo(minedTime)}</td>
+                        <td>${maturityText}</td>
+                        <td class="${effortClass}">${effort > 0 ? effort.toFixed(1) + '%' : '--'}</td>
+                        <td>${formatSAL(reward)}</td>
+                        <td>${formatNumber(height)}</td>
+                        <td>
+                            ${hash ? `<a href="https://explorer.salvium.io/block/${hash}" target="_blank" class="explorer-link">${hash.substring(0, 16)}...</a>` : '--'}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Payments functions
+        async function fetchPaymentsData() {
+            try {
+                const response = await fetch(`${CONFIG.apiUrl}/get_payments?limit=50`);
+                const data = await response.json();
+                updatePaymentsTable(data);
+            } catch (error) {
+                console.error('Failed to fetch payments data:', error);
+                document.getElementById('payments-table-body').innerHTML = 
+                    '<tr><td colspan="5" class="loading">Failed to load payments data</td></tr>';
+            }
+        }
+
+        function updatePaymentsTable(payments) {
+            const tbody = document.getElementById('payments-table-body');
+            
+            if (!payments || !Array.isArray(payments) || payments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="loading">No payments found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = payments.map(payment => {
+                const sentTime = payment.ts || payment.timestamp;
+                const amount = payment.amount || payment.value || 0;
+                const fee = payment.fee || 0;
+                const hash = payment.hash || payment.tx || '';
+                const payees = payment.payees || payment.recipients || 1;
+                
+                return `
+                    <tr>
+                        <td>${timeAgo(sentTime)}</td>
+                        <td>${formatNumber(payees)}</td>
+                        <td>${formatSAL(amount)}</td>
+                        <td>${formatSAL(fee)}</td>
+                        <td>
+                            ${hash ? `<a href="https://explorer.salvium.io/tx/${hash}" target="_blank" class="explorer-link">${hash.substring(0, 16)}...</a>` : '--'}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Help functions
+        function initHelpSections() {
+            document.querySelectorAll('.help-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const isExpanded = this.classList.contains('expanded');
+                    
+                    if (isExpanded) {
+                        this.classList.remove('expanded');
+                        content.classList.remove('expanded');
+                    } else {
+                        this.classList.add('expanded');
+                        content.classList.add('expanded');
+                    }
+                });
+            });
+        }
+
+        // Theme handling
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            updateThemeIcon();
+            
+            setTimeout(() => {
+                if (currentAddress && graphData?.hashrate) {
+                    updateGraph();
+                } else if (!currentAddress && graphData?.hashrate) {
+                    updateGraph();
+                }
+            }, 50);
+        }
+
+        function updateThemeIcon() {
+            const button = document.getElementById('TogMode');
+            
+            if (isDarkMode) {
+                button.innerHTML = '<span class="sun-icon"></span>';
+            } else {
+                button.innerHTML = '<svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            }
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                isDarkMode = savedTheme === 'dark';
+            } else {
+                isDarkMode = true;
+            }
+            document.body.classList.toggle('dark', isDarkMode);
+            updateThemeIcon();
+        }
+
+        // Utility functions
         function formatHashrate(hashrate) {
             if (!hashrate) return '0 H/s';
             const units = ['H/s', 'KH/s', 'MH/s', 'GH/s', 'TH/s'];
@@ -915,6 +2098,7 @@
             return CONFIG.addressRegex.test(address);
         }
 
+        // API functions
         async function fetchPoolStats() {
             try {
                 const response = await fetch(`${CONFIG.apiUrl}/stats`);
@@ -975,7 +2159,6 @@
                 document.getElementById('pool-hashrate').textContent = formatHashrate(poolStats.hashrate);
             }
             
-            // Add effort percentage calculation
             if (poolStats.roundHashes !== undefined && networkStats.difficulty !== undefined) {
                 const effort = (poolStats.roundHashes / networkStats.difficulty) * 100;
                 document.getElementById('pool-effort').textContent = `${effort.toFixed(1)}%`;
@@ -991,6 +2174,20 @@
             
             if (poolStats.lastBlockFound !== undefined) {
                 document.getElementById('last-block').textContent = timeAgo(poolStats.lastBlockFound);
+            }
+            
+            if (!currentAddress) {
+                try {
+                    if (data.charts && data.charts.hashrate) {
+                        updateGraph();
+                    } else {
+                        document.getElementById('chart-loading').style.display = 'block';
+                        document.getElementById('chart-loading').textContent = 'No network chart data available';
+                        document.getElementById('hashrate-chart').style.display = 'none';
+                    }
+                } catch (error) {
+                    document.getElementById('chart-loading').textContent = 'Chart temporarily unavailable';
+                }
             }
         }
 
@@ -1011,10 +2208,7 @@
             const stats = data.stats || data;
             
             document.getElementById('miner-hashrate').textContent = formatHashrate(stats.hashrate || 0);
-            
-            // Fixed: Use validShares instead of hashes for share count
-            const shares = stats.validShares || stats.roundShares || stats.totalShares || stats.shares || 0;
-            document.getElementById('miner-shares').textContent = formatNumber(shares);
+            document.getElementById('miner-shares').textContent = formatNumber(stats.validShares || stats.totalShares || 0);
             
             const balance = stats.balance || stats.pending || stats.amtDue || 0;
             document.getElementById('miner-pending').textContent = formatSAL(balance);
@@ -1022,6 +2216,18 @@
 
             updateAddressStats(data);
             document.getElementById('current-balance').textContent = formatSAL(balance);
+
+            try {
+                if (data.charts && data.charts.hashrate) {
+                    updateGraph();
+                } else {
+                    document.getElementById('chart-loading').style.display = 'block';
+                    document.getElementById('chart-loading').textContent = 'No chart data available for this address';
+                    document.getElementById('hashrate-chart').style.display = 'none';
+                }
+            } catch (error) {
+                console.log('User chart update failed:', error);
+            }
 
             if (data.workers && data.workers.length > 0) {
                 updateWorkers(data.workers);
@@ -1072,8 +2278,7 @@
                     displayName = displayName.substring(0, 22) + '...';
                 }
                 
-                // Fixed: Use validShares for workers too instead of hashes
-                const workerShares = stats.validShares || stats.roundShares || stats.shares || 0;
+                const workerHashes = stats.hashes || 0;
                 
                 return `
                     <div class="worker-card">
@@ -1084,16 +2289,16 @@
                                 <span class="worker-stat-value">${formatHashrate(stats.hashrate || 0)}</span>
                             </div>
                             <div class="worker-stat">
-                                <span class="worker-stat-label">Shares:</span>
-                                <span class="worker-stat-value">${formatNumber(workerShares)}</span>
+                                <span class="worker-stat-label">Hashes:</span>
+                                <span class="worker-stat-value">${formatNumber(workerHashes)}</span>
                             </div>
                             <div class="worker-stat">
                                 <span class="worker-stat-label">Last Share:</span>
                                 <span class="worker-stat-value">${stats.lastShare ? timeAgo(stats.lastShare) : 'Never'}</span>
                             </div>
                             <div class="worker-stat">
-                                <span class="worker-stat-label">Difficulty:</span>
-                                <span class="worker-stat-value">${formatNumber(stats.diff || 0)}</span>
+                                <span class="worker-stat-label">1h Avg Rate:</span>
+                                <span class="worker-stat-value">${formatHashrate(stats.hashrate_1h || 0)}</span>
                             </div>
                         </div>
                     </div>
@@ -1132,46 +2337,32 @@
             document.getElementById('workers-section').classList.add('hide');
             document.getElementById('address-stats').classList.remove('show');
             hidePayoutPopup();
-        }
-
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark', isDarkMode);
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            updateThemeIcon();
-        }
-
-        function updateThemeIcon() {
-            const button = document.getElementById('TogMode');
             
-            if (isDarkMode) {
-                button.innerHTML = '<span class="sun-icon"></span>';
-            } else {
-                button.innerHTML = '<svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            try {
+                if (poolData && poolData.charts && poolData.charts.hashrate) {
+                    updateGraph();
+                } else {
+                    document.getElementById('chart-title').textContent = 'Network Hashrate';
+                    document.getElementById('chart-subtitle').textContent = 'Network hashrate activity over the last 8 hours';
+                    document.getElementById('legend-text').textContent = 'Network Hashrate';
+                    document.getElementById('chart-loading').style.display = 'block';
+                    document.getElementById('chart-loading').textContent = 'Loading charts...';
+                    document.getElementById('hashrate-chart').style.display = 'none';
+                }
+            } catch (error) {
+                console.log('Chart reset failed:', error);
             }
         }
 
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                isDarkMode = savedTheme === 'dark';
-            } else {
-                isDarkMode = true;
-            }
-            document.body.classList.toggle('dark', isDarkMode);
-            updateThemeIcon();
-        }
-
+        // Payout functions
         async function fetchPayoutLevel(address) {
             try {
                 const response = await fetch(`${CONFIG.apiUrl}/get_miner_payout_level?address=${address}`);
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Payout level response:', data); // Debug log
                     
-                    // Handle different response formats
                     if (data.level !== undefined) {
-                        return data.level * Math.pow(10, CONFIG.salviumDecimals); // Convert SAL to atomic units
+                        return data.level * Math.pow(10, CONFIG.salviumDecimals);
                     }
                     if (data.threshold !== undefined) {
                         return data.threshold;
@@ -1179,7 +2370,6 @@
                     
                     return window.poolMinPayment || 100000000000;
                 } else {
-                    console.log('Payout level fetch failed:', response.status);
                     return window.poolMinPayment || 100000000000;
                 }
             } catch (error) {
@@ -1211,7 +2401,6 @@
                 return;
             }
             
-            // Basic IP validation
             const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             if (!ipRegex.test(workerIp)) {
                 showError('Please enter a valid IP address (e.g., 192.168.1.100)');
@@ -1222,9 +2411,6 @@
             button.textContent = 'Setting...';
             
             try {
-                console.log('Setting payout threshold:', threshold, 'SAL for IP:', workerIp);
-                
-                // Try both SAL units and atomic units with IP parameter
                 const formats = [
                     { level: threshold, desc: 'SAL units' },
                     { level: Math.floor(threshold * Math.pow(10, CONFIG.salviumDecimals)), desc: 'atomic units' }
@@ -1235,33 +2421,25 @@
                 for (const format of formats) {
                     try {
                         const url = `${CONFIG.apiUrl}/set_miner_payout_level?address=${currentAddress}&level=${format.level}&ip=${workerIp}`;
-                        console.log('Trying URL with', format.desc + ':', url);
                         
                         const response = await fetch(url, {
                             method: 'GET'
                         });
                         
-                        console.log('Response status:', response.status);
-                        
                         if (response.ok) {
                             const responseData = await response.json();
-                            console.log('Response data:', responseData);
                             
                             if (responseData.status === 'done' || responseData.status === 'success') {
                                 success = true;
                                 showSuccess('Payout threshold updated successfully');
                                 
-                                // Refresh the payout level after a short delay to confirm it was set
                                 setTimeout(async () => {
                                     const newLevel = await fetchPayoutLevel(currentAddress);
                                     document.getElementById('current-threshold').textContent = formatSAL(newLevel);
-                                    console.log('Verified new threshold:', formatSAL(newLevel), 'SAL');
                                 }, 1500);
                                 break;
                             } else {
-                                console.log('API returned error status with', format.desc + ':', responseData.status);
                                 if (responseData.status === 'Parameters are incomplete') {
-                                    // Don't break yet, try the other format
                                     continue;
                                 }
                             }
@@ -1284,6 +2462,35 @@
             }
         }
 
+        async function requestInstantPayout() {
+            const button = document.getElementById('instant-payout-btn');
+            
+            if (!currentAddress) {
+                showError('Please enter your wallet address first');
+                return;
+            }
+            
+            button.disabled = true;
+            button.textContent = 'Requesting...';
+            
+            try {
+                const response = await fetch(`${CONFIG.apiUrl}/request_payout?address=${currentAddress}`);
+                
+                if (response.ok) {
+                    showSuccess('Payout request submitted successfully');
+                    fetchMinerStats(currentAddress);
+                } else {
+                    throw new Error('Failed to request payout');
+                }
+            } catch (error) {
+                console.error('Error requesting payout:', error);
+                showError('Instant payout feature not available yet');
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Request Payout';
+            }
+        }
+
         async function fetchUserIP() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -1292,7 +2499,6 @@
             } catch (error) {
                 console.log('Failed to fetch user IP:', error);
                 try {
-                    // Fallback to another service
                     const response = await fetch('https://ipapi.co/ip/');
                     const ip = await response.text();
                     return ip.trim();
@@ -1308,19 +2514,15 @@
             const gear = document.getElementById('address-gear');
             
             if (currentAddress) {
-                console.log('Fetching payout level for:', currentAddress);
                 fetchPayoutLevel(currentAddress).then(threshold => {
-                    console.log('Retrieved threshold:', threshold);
                     const thresholdSAL = formatSAL(threshold);
                     document.getElementById('current-threshold').textContent = thresholdSAL;
                     
-                    // Only pre-fill if it's not the default minimum
                     const poolMin = window.poolMinPayment || 100000000000;
                     if (threshold > poolMin) {
                         const thresholdValue = parseFloat(thresholdSAL);
                         document.getElementById('payout-threshold').value = thresholdValue.toFixed(6);
                     } else {
-                        // Show pool minimum as placeholder
                         const poolMinSAL = formatSAL(poolMin);
                         document.getElementById('payout-threshold').placeholder = parseFloat(poolMinSAL).toFixed(6);
                         document.getElementById('current-threshold').textContent = poolMinSAL;
@@ -1334,7 +2536,6 @@
                 });
             }
             
-            // Fetch and display user's IP address
             fetchUserIP().then(ip => {
                 const userIpElement = document.getElementById('user-ip');
                 if (ip) {
@@ -1342,7 +2543,6 @@
                     userIpElement.style.cursor = 'pointer';
                     userIpElement.title = 'Click to use this IP';
                     
-                    // Make IP clickable to auto-fill
                     userIpElement.onclick = function() {
                         document.getElementById('worker-ip').value = ip;
                         userIpElement.style.color = '#0AEB85';
@@ -1471,6 +2671,14 @@
             }, CONFIG.updateInterval);
         }
 
+        function startGraphUpdates() {
+            if (graphTimer) clearInterval(graphTimer);
+            
+            graphTimer = setInterval(() => {
+                fetchGraphData();
+            }, 300000); // 5 minutes
+        }
+
         function init() {
             initTheme();
             
@@ -1491,14 +2699,20 @@
             }
             
             const setThresholdBtn = document.getElementById('set-threshold-btn');
+            const instantPayoutBtn = document.getElementById('instant-payout-btn');
+            
             if (setThresholdBtn) {
                 setThresholdBtn.addEventListener('click', setPayoutThreshold);
+            }
+            if (instantPayoutBtn) {
+                instantPayoutBtn.addEventListener('click', requestInstantPayout);
             }
             
             const addressGear = document.getElementById('address-gear');
             if (addressGear) {
                 addressGear.addEventListener('click', function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
                     togglePayoutSettings();
                 });
             }
@@ -1514,7 +2728,56 @@
                 }
             });
             
+            // Navigation event listeners
+            document.getElementById('nav-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                hideAllOverlays();
+                showNav('home');
+            });
+
+            document.getElementById('nav-blocks').addEventListener('click', function(e) {
+                e.preventDefault();
+                showNav('blocks');
+                showOverlay('blocks-overlay');
+                fetchBlocksData();
+            });
+
+            document.getElementById('nav-payments').addEventListener('click', function(e) {
+                e.preventDefault();
+                showNav('payments');
+                showOverlay('payments-overlay');
+                fetchPaymentsData();
+            });
+
+            document.getElementById('nav-help').addEventListener('click', function(e) {
+                e.preventDefault();
+                showNav('help');
+                showOverlay('help-overlay');
+            });
+
+            // Overlay close buttons
+            document.querySelectorAll('.overlay-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    hideAllOverlays();
+                    showNav('home');
+                });
+            });
+
+            // Close overlays when clicking outside
+            document.querySelectorAll('.overlay').forEach(overlay => {
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        hideAllOverlays();
+                        showNav('home');
+                    }
+                });
+            });
+
+            // Initialize help sections
+            initHelpSections();
+            
             loadSavedAddress();
+            fetchGraphData();
             fetchPoolStats();
             
             if (!currentAddress) {
@@ -1522,6 +2785,25 @@
             }
             
             startAutoUpdate();
+            startGraphUpdates();
+            
+            // Handle page visibility for efficient updates
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    if (updateTimer) clearInterval(updateTimer);
+                    if (graphTimer) clearInterval(graphTimer);
+                } else {
+                    startAutoUpdate();
+                    startGraphUpdates();
+                    fetchGraphData();
+                    fetchPoolStats();
+                    if (currentAddress) {
+                        fetchMinerStats(currentAddress);
+                    } else {
+                        fetchBlocks();
+                    }
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', init);
