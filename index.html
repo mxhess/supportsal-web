@@ -1963,8 +1963,20 @@
         // Payments functions
         async function fetchPaymentsData() {
             try {
-                const response = await fetch(`${CONFIG.apiUrl}/get_payments?limit=50`);
+                const currentTime = Math.floor(Date.now() / 1000);
+                let url = `${CONFIG.apiUrl}/get_payments?limit=50&time=${currentTime}`;
+                
+                if (currentAddress) {
+                    url += `&address=${currentAddress}`;
+                }
+                
+                const response = await fetch(url);
                 const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
                 updatePaymentsTable(data);
             } catch (error) {
                 console.error('Failed to fetch payments data:', error);
@@ -1981,12 +1993,29 @@
                 return;
             }
 
+            // Debug: Log the first payment to see available fields
+            if (payments.length > 0) {
+                console.log('Payment data structure:', payments[0]);
+                console.log('Available payment fields:', Object.keys(payments[0]));
+            }
+
             tbody.innerHTML = payments.map(payment => {
                 const sentTime = payment.ts || payment.timestamp;
                 const amount = payment.amount || payment.value || 0;
                 const fee = payment.fee || 0;
                 const hash = payment.hash || payment.tx || '';
                 const payees = payment.payees || payment.recipients || 1;
+                
+                // Check for block-related fields
+                const blockHeight = payment.blockHeight || payment.block || payment.height;
+                const blockHash = payment.blockHash || payment.blockTx;
+                
+                console.log('Payment fields for block mapping:', {
+                    blockHeight,
+                    blockHash,
+                    amount,
+                    sentTime
+                });
                 
                 return `
                     <tr>
