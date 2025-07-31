@@ -19,6 +19,7 @@ StandardError=journal
 # Environment variables
 Environment=PYTHONUNBUFFERED=1
 Environment=FLASK_ENV=production
+Environment=FLASK_DEBUG=false
 
 # Security settings
 NoNewPrivileges=true

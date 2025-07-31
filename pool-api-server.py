@@ -270,5 +270,5 @@ if __name__ == '__main__':
     print(f"  GET /api/tracked_addresses - List tracked addresses")
     print(f"  GET /api/redis_stats - Redis statistics")
     
-    app.run(host='0.0.0.0', port=API_PORT, debug=False)
+    app.run(host='127.0.0.1', port=API_PORT, debug=False)
 
