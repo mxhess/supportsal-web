@@ -2259,6 +2259,14 @@
                 });
             }
             
+            // Last block click handler
+            document.getElementById('last-block').addEventListener('click', function(e) {
+                e.preventDefault();
+                showNav('blocks');
+                showOverlay('blocks-overlay');
+                fetchBlocksData();
+            });
+
             // Navigation event listeners
             document.getElementById('nav-home').addEventListener('click', function(e) {
                 e.preventDefault();
