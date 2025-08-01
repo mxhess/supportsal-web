@@ -1265,9 +1265,9 @@
                 <div class="help-content">
                     <p>Start here if you need a Salvium address and wallet:</p>
                     <ul>
-                        <li>Download the official <strong>Salvium Wallet</strong> from the official website</li>
+                        <li>Download the official <strong><a href="https://salvium.io/download.html" target="_blank" class="C1">Salvium Wallet</a></strong> from the official website</li>
                         <li>Create a new wallet and securely backup your seed phrase</li>
-                        <li>Your Salvium address will start with <code>SaLv</code> and be 98 characters long</li>
+                        <li>Your Salvium address will start with <code>SaLv</code></li>
                         <li>Keep your wallet synchronized to receive mining payments</li>
                     </ul>
                     <p><strong>Important:</strong> Never share your private keys or seed phrase with anyone!</p>
@@ -1283,8 +1283,8 @@
                 <div class="help-content">
                     <p>We recommend using <strong>XMRig</strong> for mining Salvium:</p>
                     <ul>
-                        <li><strong>XMRig</strong> - Best performance for CPU and GPU mining</li>
-                        <li><strong>xmr-stak-cpu</strong> - Alternative CPU miner</li>
+                        <li><strong><a href="https://github.com/xmrig/xmrig/releases" target="_blank" class="C1">XMRig</a></strong> - Best performance for CPU and GPU mining</li>
+                        <li><strong><a href="https://github.com/fireice-uk/xmr-stak/releases" target="_blank" class="C1">xmr-stak-cpu</a></strong> - Alternative CPU miner</li>
                         <li>Download from official sources only to avoid malware</li>
                         <li>Windows Defender may flag miners as false positives - add exclusions</li>
                     </ul>
@@ -1306,19 +1306,17 @@
                     
                     <h4 class="C1">Port Descriptions:</h4>
                     <ul>
-                        <li><strong>3333</strong> - Low-end hardware (50K difficulty)</li>
-                        <li><strong>4444</strong> - Mid-range hardware (250K difficulty)</li>
-                        <li><strong>5555</strong> - High-end hardware (800K difficulty)</li>
-                        <li><strong>7777</strong> - Cloud mining/NiceHash (2M difficulty)</li>
+                        <li><strong>4242</strong> - non-ssl</li>
+                        <li><strong>4343</strong> - ssl</li>
                     </ul>
+                    <p><strong>Note:</strong> We start connections at 100K difficulty and work our way up or down slowly to a proper vardiff range to avoid large unproductive swings in difficulty.</p>
 
                     <h4 class="C1">XMRig Configuration Example:</h4>
                     <div class="config-example">{
     "pools": [
         {
             "algo": "rx/0",
-            "coin": "salvium",
-            "url": "pool.supportsal.com:4444",
+            "url": "pool.supportsal.com:4242",
             "user": "SaLv...(your wallet address)",
             "pass": "x",
             "rig-id": "worker1",
@@ -1329,10 +1327,9 @@
 }</div>
 
                     <h4 class="C1">Command Line Example:</h4>
-                    <code>xmrig -o pool.supportsal.com:4444 -u SaLv...(your wallet address) -p x</code>
+                    <code>xmrig -o pool.supportsal.com:4242 -a rx/0 -u SaLv...(your wallet address) -p x --rig-id="worker1" -k</code>
 
                     <p><strong>Your Salvium Address:</strong> Enter your full Salvium wallet address as the username</p>
-                    <p><strong>Worker Name:</strong> Optionally add a worker name: <code>youraddress.workername</code></p>
                 </div>
             </div>
 
@@ -1355,16 +1352,14 @@
                     <ul>
                         <li><strong>Pool Fee:</strong> 0.7%</li>
                         <li><strong>Default Payout:</strong> 0.1 SAL minimum</li>
-                        <li><strong>Block Confirmation:</strong> 60 blocks</li>
-                        <li><strong>Payment System:</strong> RBPPS (Round Based Pay Per Share)</li>
+                        <li><strong>Payment System:</strong> PPLNS (Pay Per Last N Shares)</li>
                     </ul>
 
                     <h4 class="C1">Need Help?</h4>
                     <p>Join our community for support:</p>
                     <ul>
                         <li>Visit <code>support@supportsal.com</code> for technical issues</li>
-                        <li>Check our FAQ and documentation</li>
-                        <li>Connect with other miners in our community chat</li>
+                        <li>Connect with other miners in the <strong><a href="https://discord.gg/rERNj5EC" target="_blank" class="C1">Salvium Discord</a></strong></li>
                     </ul>
                 </div>
             </div>
