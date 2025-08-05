@@ -1084,7 +1084,7 @@
             <div id="HeadLogo">
                 <span class="support">support</span>
                 <span class="sal">SAL</span>
-                <span class="dot"></span>
+                <span class="dot"></span><pre>     Alpha release - we're fine tuning things</pre>
             </div>
             
             <div class="header-right">
@@ -1269,7 +1269,7 @@
                     
                     <p><strong>Supporting Salvium's Future:</strong> We regularly donate a portion of our net proceeds (after operating costs) directly to the Salvium project development fund. When you mine with us, you're not just earning SAL - you're actively contributing to the project's growth and sustainability.</p>
                     
-                    <p>If you need assistance, please be patient - this isn't a full-time operation, but we will get back to you as soon as possible. We believe in supporting miners and the Salvium ecosystem through fair fees, reliable infrastructure, and genuine community engagement.</p>
+                    <p>If you need assistance, please be patient - this isn't a full-time operation (yet), but we will get back to you as soon as possible. We believe in supporting miners and the Salvium ecosystem through fair fees, reliable infrastructure, and genuine community engagement.</p>
                     
                     <p><strong>Why choose SupportSAL?</strong></p>
                     <ul>
@@ -1413,6 +1413,16 @@
         let currentNav = 'home';
 
         // Navigation functions
+        function updateBlocksVisibility() {
+            const blocksSection = document.querySelector('.blocks-section');
+            if (currentAddress) {
+                // In miner mode - hide the recent blocks section
+                blocksSection.style.display = 'none';
+            } else {
+                // In pool mode - show the recent blocks section
+                blocksSection.style.display = 'block';
+            }
+        }
         function showNav(navItem) {
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
@@ -1921,7 +1931,9 @@
             document.getElementById('pool-hashrate').textContent = formatHashrate(data.pool_hashrate || 0);
             
             // Calculate effort
-            if (data.round_hashes && data.network_difficulty) {
+            if (data.effort !== undefined) {
+                document.getElementById('pool-effort').textContent = `${data.effort.toFixed(1)}%`;
+            } else if (data.round_hashes && data.network_difficulty) {
                 const effort = (data.round_hashes / data.network_difficulty) * 100;
                 document.getElementById('pool-effort').textContent = `${effort.toFixed(1)}%`;
             } else {
@@ -1960,7 +1972,10 @@
             document.getElementById('miner-hashrate').textContent = formatHashrate(data.miner_hashrate || 0);
             document.getElementById('miner-pending').textContent = formatSAL(data.miner_balance * Math.pow(10, CONFIG.salviumDecimals) || 0);
             document.getElementById('miner-paid').textContent = formatSAL((data.miner_paid || 0) * Math.pow(10, CONFIG.salviumDecimals));
-            document.getElementById('miner-workers-count').textContent = formatNumber(data.worker_count || 0);
+            
+            // Count only active workers for display
+            const activeWorkerCount = data.worker_count || 0;
+            document.getElementById('miner-workers-count').textContent = formatNumber(activeWorkerCount);
         }
 
         function updateWorkers(workers) {
@@ -1975,17 +1990,27 @@
             
             document.getElementById('workers-section').classList.remove('hide');
             
-            workerCount.textContent = workers.length;
+            // Filter for active workers only (hashrate > 0)
+            const activeWorkers = workers.filter(worker => worker.active === true || worker.status === 'active');
+
+            // If no active workers, hide the section
+            if (activeWorkers.length === 0) {
+                document.getElementById('workers-section').classList.add('hide');
+                return;
+            }
+ 
+            // Update count to show only active workers
+            workerCount.textContent = activeWorkers.length;
             workersUpdated.textContent = new Date().toLocaleTimeString();
             
-            workersGrid.innerHTML = workers.map((worker, index) => {
+            // Still display ALL workers (including offline) but count only shows active
+            workersGrid.innerHTML = activeWorkers.map((worker, index) => {
                 const workerName = worker.identifier || worker.name || `Worker-${index + 1}`;
                 const hashrate = worker.hashrate || 0;
-                const isOnline = hashrate > 0;
                 const canvasId = `worker-chart-${index}`;
                 
                 return `
-                    <div class="worker-card ${isOnline ? '' : 'offline'}">
+                    <div class="worker-card">
                         <div class="worker-header">
                             <div class="worker-name">${workerName.length > 20 ? workerName.substring(0, 17) + '...' : workerName}</div>
                             <div class="worker-hashrate">${formatHashrate(hashrate)}</div>
@@ -1997,9 +2022,15 @@
                 `;
             }).join('');
             
+            // Also update the stat card to show active count
+            const minerWorkersCount = document.getElementById('miner-workers-count');
+            if (minerWorkersCount) {
+                minerWorkersCount.textContent = activeWorkers.length;
+            }
+            
             // Fetch chart data for each worker
             setTimeout(() => {
-                workers.forEach((worker, index) => {
+                activeWorkers.forEach((worker, index) => {
                     const workerName = worker.identifier || worker.name || `Worker-${index + 1}`;
                     const canvasId = `worker-chart-${index}`;
                     if (currentAddress) {
@@ -2142,7 +2173,7 @@
                         <td class="${effortClass}">${effort > 0 ? effort.toFixed(1) + '%' : '--'}</td>
                         <td>${formatSAL(reward)}</td>
                         <td>
-                            ${hash ? `<a href="https://explorer.salvium.io/block/${hash}" target="_blank" class="explorer-link">${hash.substring(0, 16)}...</a>` : '--'}
+                            ${hash ? `<a href="https://explorer.salvium.io/block/${height}" target="_blank" class="explorer-link">${hash.substring(0, 16)}...</a>` : '--'}
                         </td>
                     </tr>
                 `;
@@ -2204,6 +2235,9 @@
                 
                 currentAddress = addressToLoad;
                 fetchMinerStats(addressToLoad);
+		updateBlocksVisibility();
+            } else {
+                updateBlocksVisibility();
             }
         }
 
@@ -2219,6 +2253,7 @@
                 fetchBlocks();
                 localStorage.removeItem('salvium_address');
                 fetchGraphData(); // Refresh graph to show pool data
+		updateBlocksVisibility();
                 return;
             }
             
@@ -2230,6 +2265,7 @@
                     currentAddress = address;
                     fetchMinerStats(address);
                     fetchGraphData(); // Refresh graph to show miner data
+		    updateBlocksVisibility();
                 }
             } else {
                 input.classList.add('C4');
@@ -2257,6 +2293,7 @@
             
             graphTimer = setInterval(() => {
                 fetchGraphData();
+		updateBlocksVisibility();
             }, 60000); // 1 minute for graph updates
         }
 
@@ -2341,6 +2378,7 @@
             // Initial graph fetch
             setTimeout(() => {
                 fetchGraphData();
+		updateBlocksVisibility();
             }, 1000);
             
             startAutoUpdate();
@@ -2355,6 +2393,7 @@
                     startAutoUpdate();
                     startGraphUpdates();
                     fetchGraphData();
+		    updateBlocksVisibility();
                     fetchPoolStats();
                     if (currentAddress) {
                         fetchMinerStats(currentAddress);
