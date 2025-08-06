@@ -1063,6 +1063,43 @@
                 padding: 0.5rem;
                 font-size: 12px;
             }
+	    .graph-tooltip {
+		    position: absolute;
+		    background: rgba(24, 28, 36, 0.95);
+		    color: #F7F8FA;
+		    padding: 0.75rem;
+		    border-radius: 5px;
+		    font-size: 12px;
+		    pointer-events: none;
+		    opacity: 0;
+		    transition: opacity 0.2s ease;
+		    z-index: 1000;
+		    border: 1px solid #40E0D0;
+		    backdrop-filter: blur(10px);
+		    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		    white-space: nowrap;
+	    }
+
+	    body.dark .graph-tooltip {
+		    background: rgba(247, 248, 250, 0.95);
+		    color: #181C24;
+	    }
+
+	    .graph-tooltip.show {
+		    opacity: 1;
+	    }
+
+	    .tooltip-time {
+		    font-weight: bold;
+		    color: #40E0D0;
+		    margin-bottom: 0.25rem;
+	    }
+
+	    .tooltip-value {
+		    color: #0AEB85;
+		    font-size: 14px;
+		    font-weight: bold;
+	    }
         }
 
         @media all and (max-width: 600px) {
@@ -1554,108 +1591,204 @@
                 }
             }
         }
-        function drawChart(ctx, canvas, data, type = 'pool') {
-            const width = canvas.width;
-            const height = canvas.height;
-            const padding = 20;
-            const leftPadding = 50;
-            const chartWidth = width - leftPadding - padding;
-            const chartHeight = height - (padding * 2);
+
+function initGraphInteraction() {
+    const canvas = document.getElementById('hashrate-chart');
+    const container = document.getElementById('graph-container');
+    
+    // Create tooltip element
+    const tooltip = document.createElement('div');
+    tooltip.className = 'graph-tooltip';
+    container.appendChild(tooltip);
+    
+    canvas.addEventListener('mousemove', function(e) {
+        if (!canvas.dataPoints || canvas.dataPoints.length === 0) return;
+        
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Find closest data point
+        let closestPoint = null;
+        let closestDistance = Infinity;
+        
+        canvas.dataPoints.forEach(point => {
+            const distance = Math.sqrt(Math.pow(x - point.x, 2) + Math.pow(y - point.y, 2));
+            if (distance < closestDistance && distance < 20) { // 20px threshold
+                closestDistance = distance;
+                closestPoint = point;
+            }
+        });
+        
+        if (closestPoint) {
+            // Format time
+            const date = new Date(closestPoint.timestamp * 1000);
+            const timeStr = date.toLocaleTimeString();
             
-            // Clear canvas
-            ctx.clearRect(0, 0, width, height);
+            // Update tooltip content
+            tooltip.innerHTML = `
+                <div class="tooltip-time">${timeStr}</div>
+                <div class="tooltip-value">${formatHashrate(closestPoint.value)}</div>
+            `;
             
-            if (!data || data.length === 0) {
-                // Draw "No data" message
-                ctx.fillStyle = '#818181';
-                ctx.font = '14px Tahoma';
-                ctx.textAlign = 'center';
-                ctx.fillText('No chart data available', width / 2, height / 2);
-                return;
+            // Position tooltip
+            tooltip.style.left = (closestPoint.x + 10) + 'px';
+            tooltip.style.top = (closestPoint.y - 40) + 'px';
+            
+            // Adjust if too close to edge
+            if (closestPoint.x > canvas.width - 150) {
+                tooltip.style.left = (closestPoint.x - 120) + 'px';
             }
             
-            // Set colors based on theme and type
-            const lineColor = '#0AEB85'; // Always use Salvium green for consistency
-            const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-            const textColor = '#818181';
+            tooltip.classList.add('show');
             
-            // Extract values and find min/max
-            const values = data.map(point => point[1] || 0);
-            const maxValue = Math.max(...values);
-            const minValue = Math.min(...values);
-            const valueRange = maxValue - minValue || 1;
-            
-            // Draw grid lines
-            ctx.strokeStyle = gridColor;
-            ctx.lineWidth = 0.5;
-            ctx.setLineDash([2, 2]);
-            
-            for (let i = 0; i <= 4; i++) {
-                const y = padding + (i * chartHeight / 4);
-                ctx.beginPath();
-                ctx.moveTo(leftPadding, y);
-                ctx.lineTo(width - padding, y);
-                ctx.stroke();
-            }
-            
-            // Reset line dash
-            ctx.setLineDash([]);
-            
-            // Draw the chart line
-            if (values.length > 1) {
-                ctx.strokeStyle = lineColor;
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                
-                for (let i = 0; i < values.length; i++) {
-                    const x = leftPadding + (i * chartWidth / (values.length - 1));
-                    const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
-                    const y = height - padding - (normalizedValue * chartHeight);
-                    
-                    if (i === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                
-                ctx.stroke();
-                
-                // Add area fill
-                ctx.globalAlpha = 0.2;
-                ctx.fillStyle = lineColor;
-                ctx.beginPath();
-                
-                ctx.moveTo(leftPadding, height - padding);
-                const firstNormalizedValue = valueRange > 0 ? (values[0] - minValue) / valueRange : 0.5;
-                const firstY = height - padding - (firstNormalizedValue * chartHeight);
-                ctx.lineTo(leftPadding, firstY);
-                
-                for (let i = 0; i < values.length; i++) {
-                    const x = leftPadding + (i * chartWidth / (values.length - 1));
-                    const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
-                    const y = height - padding - (normalizedValue * chartHeight);
-                    ctx.lineTo(x, y);
-                }
-                
-                ctx.lineTo(width - padding, height - padding);
-                ctx.closePath();
-                ctx.fill();
-                ctx.globalAlpha = 1;
-            }
-            
-            // Draw Y-axis labels
-            ctx.fillStyle = textColor;
-            ctx.font = '10px Arial';
-            ctx.textAlign = 'right';
-            
-            for (let i = 0; i <= 4; i++) {
-                const value = minValue + (i * valueRange / 4);
-                const y = height - padding - (i * chartHeight / 4);
-                const formattedValue = formatHashrateShort(value);
-                ctx.fillText(formattedValue, leftPadding - 8, y + 3);
+            // Highlight the point
+            const ctx = canvas.getContext('2d');
+            ctx.save();
+            ctx.fillStyle = '#40E0D0';
+            ctx.strokeStyle = '#0AEB85';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(closestPoint.x, closestPoint.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+        } else {
+            tooltip.classList.remove('show');
+            // Redraw to remove highlight
+            if (graphData) {
+                updateGraph();
             }
         }
+    });
+    
+    canvas.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('show');
+        // Redraw to remove highlight
+        if (graphData) {
+            updateGraph();
+        }
+    });
+}
+
+function drawChart(ctx, canvas, data, type = 'pool') {
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 20;
+    const leftPadding = 50;
+    const chartWidth = width - leftPadding - padding;
+    const chartHeight = height - (padding * 2);
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+    
+    if (!data || data.length === 0) {
+        ctx.fillStyle = '#818181';
+        ctx.font = '14px Tahoma';
+        ctx.textAlign = 'center';
+        ctx.fillText('No chart data available', width / 2, height / 2);
+        return;
+    }
+    
+    // Store data points for mouse interaction
+    canvas.dataPoints = [];
+    
+    const lineColor = '#0AEB85';
+    const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    const textColor = '#818181';
+    
+    const values = data.map(point => point[1] || 0);
+    const maxValue = Math.max(...values);
+    const minValue = Math.min(...values);
+    const valueRange = maxValue - minValue || 1;
+    
+    // Draw grid lines
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([2, 2]);
+    
+    for (let i = 0; i <= 4; i++) {
+        const y = padding + (i * chartHeight / 4);
+        ctx.beginPath();
+        ctx.moveTo(leftPadding, y);
+        ctx.lineTo(width - padding, y);
+        ctx.stroke();
+    }
+    
+    ctx.setLineDash([]);
+    
+	    // Draw the chart line and store points
+	    if (values.length > 1) {
+	        ctx.strokeStyle = lineColor;
+	        ctx.lineWidth = 2;
+	        ctx.beginPath();
+        
+       	 for (let i = 0; i < values.length; i++) {
+            const x = leftPadding + (i * chartWidth / (values.length - 1));
+            const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
+            const y = height - padding - (normalizedValue * chartHeight);
+            
+            // Store point for mouse interaction
+            canvas.dataPoints.push({
+                x: x,
+	                y: y,
+	                timestamp: data[i][0],
+	                value: data[i][1],
+	                index: i
+	            });
+            
+	            if (i === 0) {
+	                ctx.moveTo(x, y);
+	            } else {
+	                ctx.lineTo(x, y);
+	            }
+	        }
+        
+	        ctx.stroke();
+        
+	        // Add area fill
+	        ctx.globalAlpha = 0.2;
+	        ctx.fillStyle = lineColor;
+	        ctx.beginPath();
+        
+	        ctx.moveTo(leftPadding, height - padding);
+	        const firstNormalizedValue = valueRange > 0 ? (values[0] - minValue) / valueRange : 0.5;
+	        const firstY = height - padding - (firstNormalizedValue * chartHeight);
+	        ctx.lineTo(leftPadding, firstY);
+        
+	        for (let i = 0; i < values.length; i++) {
+	            const x = leftPadding + (i * chartWidth / (values.length - 1));
+	            const normalizedValue = valueRange > 0 ? (values[i] - minValue) / valueRange : 0.5;
+	            const y = height - padding - (normalizedValue * chartHeight);
+	            ctx.lineTo(x, y);
+	        }
+        
+	        ctx.lineTo(width - padding, height - padding);
+	        ctx.closePath();
+	        ctx.fill();
+	        ctx.globalAlpha = 1;
+        
+	        // Draw hover points
+	        ctx.fillStyle = lineColor;
+	        canvas.dataPoints.forEach(point => {
+	            ctx.beginPath();
+	            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+	            ctx.fill();
+	        });
+	    }
+    
+	    // Draw Y-axis labels
+	    ctx.fillStyle = textColor;
+	    ctx.font = '10px Arial';
+	    ctx.textAlign = 'right';
+	    
+	    for (let i = 0; i <= 4; i++) {
+	        const value = minValue + (i * valueRange / 4);
+	        const y = height - padding - (i * chartHeight / 4);
+	        const formattedValue = formatHashrateShort(value);
+	        ctx.fillText(formattedValue, leftPadding - 8, y + 3);
+	    }
+	}
 
         // Graph functions
         async function fetchGraphData() {
@@ -2303,7 +2436,11 @@
 
         function init() {
             initTheme();
-            
+
+            setTimeout(() => {
+	        initGraphInteraction();
+	    }, 1500);
+
             // Theme toggle
             const themeButton = document.getElementById('TogMode');
             if (themeButton) {
